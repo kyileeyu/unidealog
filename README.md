@@ -142,13 +142,13 @@ src/
 - [x] **About Page**: 소개 페이지
 - [x] **404 Page**: Not Found 페이지
 
-### 📋 Phase 6: 고급 기능 및 최적화
+### ✅ Phase 6: 고급 기능 및 최적화
 
-- [ ] SEO 최적화
-- [ ] 이미지 최적화
-- [ ] 성능 최적화
-- [ ] 접근성 개선
-- [ ] Vercel 배포 설정
+- [x] **SEO 최적화**: 메타데이터, Open Graph, JSON-LD 구조화 데이터
+- [x] **이미지 최적화**: Next.js Image 컴포넌트 설정 및 최적화
+- [x] **성능 최적화**: Core Web Vitals 측정 및 최적화
+- [x] **접근성 개선**: A11y 유틸리티, 키보드 네비게이션, 스크린 리더 지원
+- [x] **Vercel 배포 설정**: 환경변수, 사이트맵, robots.txt, manifest
 
 ## 🎨 디자인 시스템
 
