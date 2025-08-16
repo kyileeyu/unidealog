@@ -2,17 +2,18 @@
 
 export const SITE_CONFIG = {
   name: process.env.NEXT_PUBLIC_SITE_NAME || "Unidealog",
-  description: process.env.NEXT_PUBLIC_SITE_DESCRIPTION || "Modern blog with Next.js and shadcn/ui",
+  description: process.env.NEXT_PUBLIC_SITE_DESCRIPTION || "nana",
   url: process.env.NEXT_PUBLIC_SITE_URL || "https://unidealog.vercel.app",
   author: {
-    name: "Your Name",
-    email: "your.email@example.com",
+    name: "Seunghyun Yu",
+    email: "kyileeeyu@gmail.com",
     bio: "Full-stack developer passionate about web technologies",
     avatar: "/images/avatar.jpg",
     socialLinks: {
-      github: `https://github.com/${process.env.NEXT_PUBLIC_GITHUB_USERNAME || "yourusername"}`,
-      twitter: `https://twitter.com/${process.env.NEXT_PUBLIC_TWITTER_HANDLE || "yourusername"}`,
-      linkedin: "https://linkedin.com/in/yourusername",
+      github: `https://github.com/${
+        process.env.NEXT_PUBLIC_GITHUB_USERNAME || "kyileeyu"
+      }`,
+      linkedin: "https://linkedin.com/in/seunghyun-yu",
     },
   },
   navigation: [

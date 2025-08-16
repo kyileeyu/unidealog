@@ -9,7 +9,9 @@
 - **Frontend**: Next.js 13+ (App Router), TypeScript
 - **Styling**: Tailwind CSS, shadcn/ui
 - **Content**: MDX (Markdown + JSX)
-- **Content Processing**: gray-matter, reading-time
+- **Content Processing**: gray-matter, reading-time, next-mdx-remote
+- **Code Highlighting**: highlight.js
+- **MDX Plugins**: rehype-highlight, rehype-slug, rehype-autolink-headings
 - **Testing**: Jest, React Testing Library
 - **Deployment**: Vercel
 
@@ -23,6 +25,67 @@
 4. **Hydration 에러 해결** - ThemeProvider 마운팅 최적화로 안정성 확보
 5. **라우터 구조 최적화** - RESTful한 URL 구조로 개선 (`/post/[slug]` → `/posts/[slug]`)
 
+### 🔧 현재 수정 중인 이슈들
+
+#### 🐛 발견된 문제점들
+
+1. **PostContent 마크다운 렌더링 이슈**
+   - 현재 상태: raw 마크다운이 그대로 표시됨
+   - 원인: `@tailwindcss/typography` 미설치 + MDX 파서 부재
+   - 해결 예정: next-mdx-remote 또는 @next/mdx 도입
+
+2. **PostNavigation 렌더링 실패**
+   - 현재 상태: 네비게이션이 화면에 나타나지 않음
+   - 원인: 데이터 구조 불일치 + 이전/다음 포스트 로직 누락
+   - 해결 예정: Post 타입 정의 수정 + 네비게이션 데이터 전달 로직 구현
+
+3. **MDX 처리 파이프라인 불완전**
+   - 누락: 코드 하이라이팅, 수식 처리, 커스텀 컴포넌트 지원
+   - 해결 예정: 완전한 MDX 생태계 구축
+
+### 🎯 긴급 수정 계획
+
+#### Phase A: PostContent 마크다운 렌더링 수정
+- [x] `@tailwindcss/typography` 플러그인 설치
+- [x] `next-mdx-remote` 및 rehype 플러그인들 설치 및 설정
+- [x] `PostContent` 컴포넌트 MDX 렌더링으로 변경
+- [x] 코드 하이라이팅 (highlight.js) 추가
+- [x] MDX 커스텀 컴포넌트 시스템 구축
+
+#### Phase B: PostNavigation 기능 복구
+- [x] `Post` 인터페이스 `wordCount` 속성 추가
+- [x] 포스트 상세 페이지에서 이전/다음 포스트 데이터 로직 구현
+- [x] `getPostNavigation` 함수와 연동
+- [x] PostNavigation 컴포넌트 데이터 바인딩 수정
+
+#### ✅ 최근 완료된 수정사항 (2025-08-16)
+
+1. **MDX 렌더링 시스템 완전 구축**
+   - `next-mdx-remote` 기반 MDX 프로세서 구현
+   - rehype-highlight, rehype-slug, rehype-autolink-headings 플러그인 추가
+   - 커스텀 MDX 컴포넌트 시스템 구축 (헤딩, 코드블록, 링크 등)
+   - PostContent 컴포넌트를 MDX 렌더링으로 전환
+
+2. **코드 하이라이팅 시스템 추가**
+   - highlight.js 통합
+   - GitHub Dark 테마 적용
+   - 자동 언어 감지 기능
+
+3. **PostNavigation 기능 복구**
+   - Post 타입에 wordCount 속성 추가
+   - 포스트 상세 페이지에서 네비게이션 데이터 계산 로직 구현
+   - 이전/다음 포스트 연결 완료
+
+4. **타입 안전성 개선**
+   - MDX 프로세서 타입 정의 개선
+   - 전체 시스템 타입 호환성 확보
+
+#### Phase C: MDX 고급 기능 추가
+- [ ] 커스텀 MDX 컴포넌트 지원
+- [ ] 수식 렌더링 (KaTeX 또는 MathJax)
+- [ ] 이미지 최적화 및 갤러리 기능
+- [ ] 목차(TOC) 자동 생성
+
 ### 🎉 현재 동작하는 기능들
 
 - ✅ 홈페이지에서 실제 MDX 포스트 목록 표시
@@ -30,6 +93,10 @@
 - ✅ 전체 포스트 목록 페이지 (`/posts`) - 카테고리 필터 포함
 - ✅ URL 쿼리를 통한 카테고리 필터링 (`/posts?category=development`)
 - ✅ 자동 SEO 메타데이터 생성 및 읽기 시간 계산
+- ✅ **MDX 콘텐츠 렌더링** - 마크다운이 올바르게 HTML로 변환되어 표시
+- ✅ **코드 하이라이팅** - 코드 블록 syntax highlighting 지원
+- ✅ **포스트 네비게이션** - 이전/다음 포스트 이동 기능
+- ✅ **커스텀 MDX 컴포넌트** - 헤딩, 코드, 링크, 테이블 등 스타일링
 
 ### 📝 포스트 작성 방법
 

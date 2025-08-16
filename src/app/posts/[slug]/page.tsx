@@ -1,5 +1,6 @@
 import { notFound } from 'next/navigation';
-import { getAllPostSlugs, getPostBySlug } from '@/shared/lib/mdx';
+import { getAllPostSlugs, getPostBySlug, getAllPosts } from '@/shared/lib/mdx';
+import { getPostNavigation } from '@/features/post-navigation/lib/navigation';
 import { PostDetailPage } from '@/page-components/post-detail';
 import { SITE_CONFIG } from '@/shared/config/site';
 
@@ -56,9 +57,23 @@ export default function PostPage({ params }: PostPageProps) {
     notFound();
   }
 
+  // 네비게이션 계산
+  const allPosts = getAllPosts();
+  const navigation = getPostNavigation(allPosts, params.slug);
+
   return (
     <PostDetailPage 
       post={post} 
+      previousPost={navigation.prev ? {
+        id: navigation.prev.id,
+        slug: navigation.prev.slug,
+        frontmatter: navigation.prev.frontmatter
+      } : undefined}
+      nextPost={navigation.next ? {
+        id: navigation.next.id,
+        slug: navigation.next.slug,
+        frontmatter: navigation.next.frontmatter
+      } : undefined}
       siteTitle={SITE_CONFIG.name}
       author={SITE_CONFIG.author.name}
     />

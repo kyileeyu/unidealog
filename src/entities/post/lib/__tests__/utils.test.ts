@@ -47,11 +47,11 @@ describe('Post Utils', () => {
       
       const toc = extractTableOfContents(content);
       expect(toc).toHaveLength(1); // One root level item (Heading 1)
-      expect(toc[0].title).toBe('Heading 1');
+      expect(toc[0].text).toBe('Heading 1');
       expect(toc[0].children).toHaveLength(2); // Two h2 items under h1
-      expect(toc[0].children![0].title).toBe('Heading 2');
+      expect(toc[0].children![0].text).toBe('Heading 2');
       expect(toc[0].children![0].children).toHaveLength(1); // One h3 under first h2
-      expect(toc[0].children![1].title).toBe('Another Heading 2');
+      expect(toc[0].children![1].text).toBe('Another Heading 2');
     });
   });
 

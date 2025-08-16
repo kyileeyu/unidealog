@@ -65,7 +65,8 @@ export function getPostBySlug(slug: string): Post | null {
       },
       content,
       excerpt,
-      readingTime: Math.max(1, Math.ceil(stats.minutes))
+      readingTime: Math.max(1, Math.ceil(stats.minutes)),
+      wordCount: stats.words
     };
   } catch (error) {
     console.error(`Error reading post ${slug}:`, error);

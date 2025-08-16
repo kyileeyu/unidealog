@@ -1,5 +1,5 @@
-import type { Metadata } from "next";
 import { SITE_CONFIG } from "@/shared/config/site";
+import type { Metadata } from "next";
 
 interface SEOConfig {
   title?: string;
@@ -30,7 +30,9 @@ export function generateMetadata(config: SEOConfig = {}): Metadata {
 
   const fullTitle = title ? `${title} | ${SITE_CONFIG.name}` : SITE_CONFIG.name;
   const fullUrl = url ? `${SITE_CONFIG.url}${url}` : SITE_CONFIG.url;
-  const imageUrl = image.startsWith("http") ? image : `${SITE_CONFIG.url}${image}`;
+  const imageUrl = image.startsWith("http")
+    ? image
+    : `${SITE_CONFIG.url}${image}`;
 
   const metadata: Metadata = {
     title: fullTitle,
@@ -39,7 +41,7 @@ export function generateMetadata(config: SEOConfig = {}): Metadata {
     authors: [{ name: author }],
     creator: author,
     publisher: SITE_CONFIG.name,
-    
+
     // Open Graph
     openGraph: {
       type,
@@ -57,18 +59,6 @@ export function generateMetadata(config: SEOConfig = {}): Metadata {
         },
       ],
     },
-
-    // Twitter Card
-    twitter: {
-      card: "summary_large_image",
-      title: fullTitle,
-      description,
-      images: [imageUrl],
-      creator: SITE_CONFIG.author.socialLinks.twitter ? 
-        `@${SITE_CONFIG.author.socialLinks.twitter.split("/").pop()}` : 
-        undefined,
-    },
-
     // Additional metadata
     alternates: {
       canonical: fullUrl,
@@ -90,9 +80,11 @@ export function generateMetadata(config: SEOConfig = {}): Metadata {
     // Verification (구글 서치 콘솔, 네이버 웹마스터 도구에서 사용)
     verification: {
       google: process.env.GOOGLE_SITE_VERIFICATION,
-      other: process.env.NAVER_SITE_VERIFICATION ? {
-        "naver-site-verification": process.env.NAVER_SITE_VERIFICATION,
-      } : undefined,
+      other: process.env.NAVER_SITE_VERIFICATION
+        ? {
+            "naver-site-verification": process.env.NAVER_SITE_VERIFICATION,
+          }
+        : undefined,
     },
   };
 
@@ -135,11 +127,12 @@ interface JsonLdPersonData {
 }
 
 // JSON-LD 구조화 데이터 생성
-export function generateJsonLd(config: 
-  | { type: "Website"; data: JsonLdWebsiteData }
-  | { type: "Article"; data: JsonLdArticleData }
-  | { type: "Person"; data: JsonLdPersonData }
-  | { type: "Organization"; data: Record<string, unknown> }
+export function generateJsonLd(
+  config:
+    | { type: "Website"; data: JsonLdWebsiteData }
+    | { type: "Article"; data: JsonLdArticleData }
+    | { type: "Person"; data: JsonLdPersonData }
+    | { type: "Organization"; data: Record<string, unknown> }
 ) {
   const { type, data } = config;
 
@@ -190,7 +183,9 @@ export function generateJsonLd(config:
         datePublished: data.publishedTime,
         dateModified: data.modifiedTime || data.publishedTime,
         url: `${SITE_CONFIG.url}${data.url}`,
-        image: data.image ? `${SITE_CONFIG.url}${data.image}` : `${SITE_CONFIG.url}/og-image.png`,
+        image: data.image
+          ? `${SITE_CONFIG.url}${data.image}`
+          : `${SITE_CONFIG.url}/og-image.png`,
         keywords: data.keywords?.join(", "),
         mainEntityOfPage: {
           "@type": "WebPage",
@@ -216,7 +211,10 @@ export function generateJsonLd(config:
 }
 
 // 읽기 시간 계산
-export function calculateReadingTime(content: string, wordsPerMinute = 200): number {
+export function calculateReadingTime(
+  content: string,
+  wordsPerMinute = 200
+): number {
   const words = content.trim().split(/\s+/).length;
   const minutes = Math.ceil(words / wordsPerMinute);
   return minutes;
@@ -225,19 +223,19 @@ export function calculateReadingTime(content: string, wordsPerMinute = 200): num
 // 발췌문 생성
 export function generateExcerpt(content: string, maxLength = 160): string {
   // HTML 태그 제거
-  const plainText = content.replace(/<[^>]*>/g, '');
-  
+  const plainText = content.replace(/<[^>]*>/g, "");
+
   if (plainText.length <= maxLength) {
     return plainText;
   }
-  
+
   // 단어 경계에서 자르기
   const truncated = plainText.substring(0, maxLength);
-  const lastSpaceIndex = truncated.lastIndexOf(' ');
-  
+  const lastSpaceIndex = truncated.lastIndexOf(" ");
+
   if (lastSpaceIndex > 0) {
-    return truncated.substring(0, lastSpaceIndex) + '...';
+    return truncated.substring(0, lastSpaceIndex) + "...";
   }
-  
-  return truncated + '...';
+
+  return truncated + "...";
 }
