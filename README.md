@@ -104,12 +104,12 @@ src/
 - [x] shadcn/ui 기본 설정 및 초기화
 - [x] 테스트 환경 설정 (Jest, React Testing Library)
 
-### 📋 Phase 1: Shared Layer - 기본 컴포넌트 및 유틸리티
+### ✅ Phase 1: Shared Layer - 기본 컴포넌트 및 유틸리티
 
 - [x] shadcn/ui 기본 컴포넌트 설치 (Button, Badge, Tabs, Input, Separator, Switch)
 - [x] 공통 유틸리티 함수 구현 (기존 utils.ts 활용)
 - [x] 타입 정의 및 설정 파일 (shared/types, shared/config)
-- [ ] 테마 시스템 구축
+- [x] 테마 시스템 구축 (ThemeProvider, ThemeToggle)
 
 ### 📋 Phase 2: Entities Layer - 비즈니스 엔티티
 
