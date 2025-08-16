@@ -23,7 +23,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // TODO: 블로그 포스트들 추가
   // const posts = await getAllPosts();
   // const postPages = posts.map((post) => ({
-  //   url: `${baseUrl}/post/${post.slug}`,
+  //   url: `${baseUrl}/posts/${post.slug}`,
   //   lastModified: new Date(post.updatedAt || post.createdAt),
   //   changeFrequency: 'weekly' as const,
   //   priority: 0.7,

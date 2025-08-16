@@ -21,7 +21,7 @@ export function PostCard({ post, className, variant = 'default' }: PostCardProps
       className
     )}>
       <CardContent className="p-0">
-        <Link href={`/post/${slug}`} className="block p-6">
+        <Link href={`/posts/${slug}`} className="block p-6">
           <div className="space-y-3">
             {/* Title */}
             <h3 className={cn(
@@ -64,8 +64,8 @@ export function PostCard({ post, className, variant = 'default' }: PostCardProps
                       )}
                       onClick={(e) => {
                         e.preventDefault();
-                        // Navigate to category page
-                        window.location.href = `/posts/${category}`;
+                        // Navigate to posts page with category filter
+                        window.location.href = `/posts?category=${category}`;
                       }}
                     >
                       {category}

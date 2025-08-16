@@ -13,21 +13,22 @@
 - **Testing**: Jest, React Testing Library
 - **Deployment**: Vercel
 
-## 🚀 최근 업데이트 (2024-01-16)
+## 🚀 최근 업데이트 (2025-08-16)
 
 ### ✅ MDX 블로그 시스템 구축 완료!
 
 1. **실제 MDX 콘텐츠 파일 생성** - `content/posts/`에 샘플 포스트 추가
 2. **MDX 파싱 시스템 구현** - `/shared/lib/mdx.ts`로 완전한 파일 처리 유틸리티 구축
-3. **전체 라우팅 완성** - `/posts`, `/posts/[category]`, `/post/[slug]` 페이지 구현
+3. **전체 라우팅 완성** - `/posts`, `/posts/[slug]` 페이지 구현
 4. **Hydration 에러 해결** - ThemeProvider 마운팅 최적화로 안정성 확보
+5. **라우터 구조 최적화** - RESTful한 URL 구조로 개선 (`/post/[slug]` → `/posts/[slug]`)
 
 ### 🎉 현재 동작하는 기능들
 
 - ✅ 홈페이지에서 실제 MDX 포스트 목록 표시
-- ✅ 포스트 클릭 시 상세 페이지 이동 (`/post/[slug]`)
+- ✅ 포스트 클릭 시 상세 페이지 이동 (`/posts/[slug]`)
 - ✅ 전체 포스트 목록 페이지 (`/posts`) - 카테고리 필터 포함
-- ✅ 카테고리별 포스트 페이지 (`/posts/[category]`)
+- ✅ URL 쿼리를 통한 카테고리 필터링 (`/posts?category=development`)
 - ✅ 자동 SEO 메타데이터 생성 및 읽기 시간 계산
 
 ### 📝 포스트 작성 방법
@@ -55,13 +56,17 @@ description: '포스트 설명'
 ```
 src/
 ├── app/                    # Next.js 13+ App Router
-│   ├── (blog)/
-│   │   ├── posts/[category]/
-│   │   └── post/[slug]/
+│   ├── posts/
+│   │   ├── [slug]/        # 개별 포스트 페이지
+│   │   └── page.tsx       # 전체 포스트 목록
 │   ├── about/
+│   ├── favicon.ico
 │   ├── globals.css
 │   ├── layout.tsx
-│   └── page.tsx
+│   ├── manifest.ts
+│   ├── not-found.tsx
+│   ├── page.tsx
+│   └── sitemap.ts
 ├── shared/                 # 공유 자원 (FSD Layer 1)
 │   ├── ui/                # shadcn/ui 기본 컴포넌트
 │   │   ├── button/
@@ -118,7 +123,7 @@ src/
 │   ├── home/              # 홈페이지
 │   ├── about/             # 소개 페이지
 │   ├── post-detail/       # 포스트 상세
-│   ├── category/          # 카테고리별 포스트
+│   ├── posts/             # 포스트 목록 (카테고리 필터 포함)
 │   └── not-found/         # 404 페이지
 └── content/               # MDX 블로그 포스트
     ├── posts/
@@ -176,7 +181,7 @@ src/
 
 - [x] **Home Page**: 메인 페이지
 - [x] **Post Detail Page**: 개별 포스트 페이지
-- [x] **Category Page**: 카테고리별 포스트 페이지
+- [x] **Posts Page**: 전체 포스트 목록 + 카테고리 필터링
 - [x] **About Page**: 소개 페이지
 - [x] **404 Page**: Not Found 페이지
 

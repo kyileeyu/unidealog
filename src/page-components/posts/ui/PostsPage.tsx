@@ -4,7 +4,8 @@ import { Post } from '@/entities/post';
 import { Layout } from '@/widgets/layout';
 import { PostList } from '@/widgets/post-list';
 import { Badge } from '@/shared/ui/badge';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useSearchParams, useRouter } from 'next/navigation';
 
 interface PostsPageProps {
   posts: Post[];
@@ -21,7 +22,27 @@ export function PostsPage({
   author,
   className
 }: PostsPageProps) {
+  const searchParams = useSearchParams();
+  const router = useRouter();
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+
+  // URL에서 category 파라미터 읽기
+  useEffect(() => {
+    const categoryFromUrl = searchParams?.get('category');
+    if (categoryFromUrl && categories.includes(categoryFromUrl)) {
+      setSelectedCategory(categoryFromUrl);
+    }
+  }, [searchParams, categories]);
+
+  // 카테고리 선택 시 URL 업데이트
+  const handleCategoryChange = (category: string | null) => {
+    setSelectedCategory(category);
+    if (category) {
+      router.push(`/posts?category=${category}`);
+    } else {
+      router.push('/posts');
+    }
+  };
 
   // 선택된 카테고리에 따라 포스트 필터링
   const filteredPosts = selectedCategory 
@@ -52,7 +73,7 @@ export function PostsPage({
               <Badge
                 variant={selectedCategory === null ? "default" : "secondary"}
                 className="cursor-pointer"
-                onClick={() => setSelectedCategory(null)}
+                onClick={() => handleCategoryChange(null)}
               >
                 전체 ({posts.length})
               </Badge>
@@ -66,7 +87,7 @@ export function PostsPage({
                     key={category}
                     variant={selectedCategory === category ? "default" : "secondary"}
                     className="cursor-pointer"
-                    onClick={() => setSelectedCategory(category)}
+                    onClick={() => handleCategoryChange(category)}
                   >
                     {category} ({count})
                   </Badge>
