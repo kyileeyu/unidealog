@@ -125,14 +125,14 @@ src/
 - [x] **Post Navigation**: 이전/다음 포스트 네비게이션
 - [x] **Comments**: 댓글 시스템 (utterances)
 
-### 📋 Phase 4: Widgets Layer - 복합 UI 컴포넌트
+### ✅ Phase 4: Widgets Layer - 복합 UI 컴포넌트
 
-- [ ] **Page Header**: 네비게이션이 포함된 헤더
-- [ ] **Page Footer**: 푸터 컴포넌트
-- [ ] **Post Card**: 포스트 카드 위젯
-- [ ] **Post List**: 포스트 목록 위젯
-- [ ] **Post Content**: 포스트 내용 렌더링 위젯
-- [ ] **Layout**: 메인 레이아웃 위젯
+- [x] **Page Header**: 네비게이션이 포함된 헤더
+- [x] **Page Footer**: 푸터 컴포넌트
+- [x] **Post Card**: 포스트 카드 위젯
+- [x] **Post List**: 포스트 목록 위젯
+- [x] **Post Content**: 포스트 내용 렌더링 위젯
+- [x] **Layout**: 메인 레이아웃 위젯
 
 ### 📋 Phase 5: Pages Layer - 페이지 구성
 
