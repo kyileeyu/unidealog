@@ -111,12 +111,12 @@ src/
 - [x] 타입 정의 및 설정 파일 (shared/types, shared/config)
 - [x] 테마 시스템 구축 (ThemeProvider, ThemeToggle)
 
-### 📋 Phase 2: Entities Layer - 비즈니스 엔티티
+### ✅ Phase 2: Entities Layer - 비즈니스 엔티티
 
-- [ ] **Post Entity**: 포스트 모델 및 타입 정의
-- [ ] **Category Entity**: 카테고리 모델
-- [ ] **User Entity**: 사용자/프로필 모델 및 Bio 컴포넌트
-- [ ] MDX 파싱 및 콘텐츠 관리
+- [x] **Post Entity**: 포스트 모델 및 타입 정의
+- [x] **Category Entity**: 카테고리 모델
+- [x] **User Entity**: 사용자/프로필 모델 및 Bio 컴포넌트
+- [x] MDX 파싱 및 콘텐츠 관리
 
 ### 📋 Phase 3: Features Layer - 핵심 기능
 
