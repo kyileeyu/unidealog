@@ -1,0 +1,292 @@
+---
+emoji: '⚡'
+title: 'Next.js 13+ App Router로 성능 최적화하기'
+date: '2024-02-01'
+author: 'Your Name'
+tags: ['nextjs', 'performance', 'optimization', 'app-router']
+categories: ['development', 'tutorial']
+description: 'Next.js 13+ App Router의 새로운 기능들을 활용해 웹사이트 성능을 극대화하는 방법을 알아봅니다.'
+---
+
+# Next.js 13+ App Router로 성능 최적화하기 ⚡
+
+Next.js 13에서 도입된 **App Router**는 React Server Components를 기반으로 한 혁신적인 접근 방식입니다. 이 글에서는 App Router의 새로운 기능들을 활용해 웹사이트 성능을 극대화하는 방법을 알아보겠습니다.
+
+## 🚀 App Router의 주요 혁신
+
+### 1. React Server Components (RSC)
+서버에서 렌더링되어 클라이언트로 전송되는 컴포넌트입니다.
+
+```typescript
+// app/posts/page.tsx (Server Component)
+import { getPosts } from '@/entities/post/api';
+
+export default async function PostsPage() {
+  // 서버에서 실행되는 데이터 페칭
+  const posts = await getPosts();
+  
+  return (
+    <div>
+      <h1>포스트 목록</h1>
+      {posts.map(post => (
+        <PostCard key={post.id} post={post} />
+      ))}
+    </div>
+  );
+}
+```
+
+**장점**:
+- 📦 **번들 크기 감소**: 서버 컴포넌트는 클라이언트 번들에 포함되지 않음
+- 🔒 **보안 강화**: 민감한 로직을 서버에서 처리
+- ⚡ **빠른 초기 로딩**: HTML과 함께 컨텐츠 전송
+
+### 2. 향상된 라우팅 시스템
+```bash
+app/
+├── page.tsx                 # /
+├── about/page.tsx          # /about
+├── posts/
+│   ├── page.tsx           # /posts
+│   ├── [slug]/page.tsx    # /posts/[slug]
+│   └── loading.tsx        # 로딩 UI
+└── layout.tsx             # 공통 레이아웃
+```
+
+### 3. 스트리밍과 Suspense
+```typescript
+// app/posts/loading.tsx
+export default function Loading() {
+  return (
+    <div className="animate-pulse">
+      <div className="h-8 bg-gray-200 rounded mb-4"></div>
+      <div className="space-y-3">
+        {[...Array(3)].map((_, i) => (
+          <div key={i} className="h-4 bg-gray-200 rounded"></div>
+        ))}
+      </div>
+    </div>
+  );
+}
+```
+
+## 🎯 성능 최적화 전략
+
+### 1. 적절한 컴포넌트 분리
+
+#### Server Components vs Client Components
+```typescript
+// ✅ Server Component (기본값)
+async function PostList() {
+  const posts = await getPosts(); // 서버에서 데이터 페칭
+  
+  return (
+    <div>
+      {posts.map(post => (
+        <PostCard key={post.id} post={post} />
+      ))}
+    </div>
+  );
+}
+
+// ✅ Client Component (상호작용 필요시)
+'use client';
+
+import { useState } from 'react';
+
+function SearchInput() {
+  const [query, setQuery] = useState('');
+  
+  return (
+    <input
+      value={query}
+      onChange={(e) => setQuery(e.target.value)}
+      placeholder="검색..."
+    />
+  );
+}
+```
+
+### 2. 데이터 페칭 최적화
+
+#### 병렬 데이터 페칭
+```typescript
+// ✅ 병렬 페칭
+async function BlogPage() {
+  const [posts, categories, tags] = await Promise.all([
+    getPosts(),
+    getCategories(),
+    getTags()
+  ]);
+  
+  return (
+    <div>
+      <PostList posts={posts} />
+      <Sidebar categories={categories} tags={tags} />
+    </div>
+  );
+}
+```
+
+#### 점진적 로딩
+```typescript
+// app/posts/page.tsx
+import { Suspense } from 'react';
+
+export default function PostsPage() {
+  return (
+    <div>
+      <h1>포스트</h1>
+      
+      {/* 즉시 렌더링 */}
+      <PostFilters />
+      
+      {/* 지연 로딩 */}
+      <Suspense fallback={<PostListSkeleton />}>
+        <PostList />
+      </Suspense>
+      
+      <Suspense fallback={<SidebarSkeleton />}>
+        <Sidebar />
+      </Suspense>
+    </div>
+  );
+}
+```
+
+### 3. 이미지 최적화
+
+#### Next.js Image 컴포넌트 활용
+```typescript
+import Image from 'next/image';
+
+function PostCard({ post }) {
+  return (
+    <article>
+      <Image
+        src={post.thumbnail}
+        alt={post.title}
+        width={400}
+        height={300}
+        className="rounded-lg"
+        priority={post.featured} // 중요한 이미지 우선 로딩
+        placeholder="blur"
+        blurDataURL="data:image/jpeg;base64,..." // 블러 플레이스홀더
+      />
+      <h2>{post.title}</h2>
+    </article>
+  );
+}
+```
+
+### 4. 캐싱 전략
+
+#### 정적 생성 최적화
+```typescript
+// app/posts/[slug]/page.tsx
+export async function generateStaticParams() {
+  const posts = await getPosts();
+  
+  return posts.map((post) => ({
+    slug: post.slug,
+  }));
+}
+
+export async function generateMetadata({ params }) {
+  const post = await getPost(params.slug);
+  
+  return {
+    title: post.title,
+    description: post.description,
+  };
+}
+```
+
+#### 데이터 캐시 설정
+```typescript
+// 24시간 캐시
+export const revalidate = 86400;
+
+// 또는 fetch 레벨 캐시
+async function getPosts() {
+  const res = await fetch('https://api.example.com/posts', {
+    next: { revalidate: 3600 } // 1시간 캐시
+  });
+  
+  return res.json();
+}
+```
+
+## 📊 성능 측정 및 모니터링
+
+### 1. Core Web Vitals 측정
+```typescript
+// app/layout.tsx
+import { Analytics } from '@vercel/analytics/react';
+
+export default function RootLayout({ children }) {
+  return (
+    <html>
+      <body>
+        {children}
+        <Analytics />
+      </body>
+    </html>
+  );
+}
+```
+
+### 2. 번들 분석
+```bash
+# 번들 분석기 설치
+npm install @next/bundle-analyzer
+
+# next.config.js 설정
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true',
+});
+
+module.exports = withBundleAnalyzer({
+  // Next.js 설정
+});
+
+# 실행
+ANALYZE=true npm run build
+```
+
+## 🛠️ 실전 최적화 체크리스트
+
+### ✅ 서버 컴포넌트 최적화
+- [ ] 데이터 페칭이 필요한 컴포넌트는 서버 컴포넌트로 구현
+- [ ] 상호작용이 필요한 부분만 클라이언트 컴포넌트로 분리
+- [ ] 불필요한 `'use client'` 지시어 제거
+
+### ✅ 라우팅 최적화
+- [ ] 적절한 로딩 UI 구현
+- [ ] 에러 바운더리 설정
+- [ ] 메타데이터 최적화
+
+### ✅ 이미지 및 미디어
+- [ ] Next.js Image 컴포넌트 사용
+- [ ] 적절한 이미지 크기 및 형식 설정
+- [ ] 지연 로딩 및 우선순위 설정
+
+### ✅ 캐싱 및 재검증
+- [ ] 정적 생성 페이지 식별 및 구현
+- [ ] 적절한 재검증 시간 설정
+- [ ] ISR(Incremental Static Regeneration) 활용
+
+## 🎯 마무리
+
+App Router는 Next.js의 미래이며, React의 최신 기능들을 활용한 강력한 성능 최적화 도구입니다. 
+
+**핵심 포인트**:
+1. **서버 우선**: 가능한 한 서버 컴포넌트 활용
+2. **점진적 향상**: 필요한 부분만 클라이언트 컴포넌트로 구현
+3. **현명한 캐싱**: 적절한 캐싱 전략으로 성능 극대화
+
+다음 글에서는 App Router와 shadcn/ui를 함께 사용하는 고급 패턴들을 다뤄보겠습니다! 🎨
+
+---
+
+> **성능 측정**: [PageSpeed Insights](https://pagespeed.web.dev/)에서 실제 성능을 확인해보세요!

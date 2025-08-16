@@ -1,4 +1,4 @@
-# 📝 Unidealog - Modern Blog with TDD
+# 📝 Unidealog - Modern Blog with MDX & TDD
 
 ## 🎯 프로젝트 개요
 
@@ -8,9 +8,47 @@
 
 - **Frontend**: Next.js 13+ (App Router), TypeScript
 - **Styling**: Tailwind CSS, shadcn/ui
+- **Content**: MDX (Markdown + JSX)
+- **Content Processing**: gray-matter, reading-time
 - **Testing**: Jest, React Testing Library
-- **Content**: MDX
 - **Deployment**: Vercel
+
+## 🚀 최근 업데이트 (2024-01-16)
+
+### ✅ MDX 블로그 시스템 구축 완료!
+
+1. **실제 MDX 콘텐츠 파일 생성** - `content/posts/`에 샘플 포스트 추가
+2. **MDX 파싱 시스템 구현** - `/shared/lib/mdx.ts`로 완전한 파일 처리 유틸리티 구축
+3. **전체 라우팅 완성** - `/posts`, `/posts/[category]`, `/post/[slug]` 페이지 구현
+4. **Hydration 에러 해결** - ThemeProvider 마운팅 최적화로 안정성 확보
+
+### 🎉 현재 동작하는 기능들
+
+- ✅ 홈페이지에서 실제 MDX 포스트 목록 표시
+- ✅ 포스트 클릭 시 상세 페이지 이동 (`/post/[slug]`)
+- ✅ 전체 포스트 목록 페이지 (`/posts`) - 카테고리 필터 포함
+- ✅ 카테고리별 포스트 페이지 (`/posts/[category]`)
+- ✅ 자동 SEO 메타데이터 생성 및 읽기 시간 계산
+
+### 📝 포스트 작성 방법
+
+이제 `content/posts/` 폴더에 `.mdx` 파일을 생성하면 자동으로 블로그에 나타납니다!
+
+```markdown
+---
+emoji: '🎯'
+title: '새로운 포스트 제목'
+date: '2024-01-16'
+author: 'Your Name'
+tags: ['nextjs', 'blog']
+categories: ['development']
+description: '포스트 설명'
+---
+
+# 포스트 내용
+
+여기에 마크다운으로 글을 작성하세요!
+```
 
 ## 🏗️ 프로젝트 구조 (FSD - Feature-Sliced Design)
 
