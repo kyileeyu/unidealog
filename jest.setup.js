@@ -1,2 +1,2 @@
 // Setup file for Jest tests
-import '@testing-library/jest-dom'
+import "@testing-library/jest-dom";
