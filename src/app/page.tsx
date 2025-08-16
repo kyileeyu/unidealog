@@ -1,110 +1,50 @@
-import { ThemeToggle } from "@/shared/ui/theme-toggle";
-import Image from "next/image";
+import { HomePage } from "@/page-components/home";
+import { SITE_CONFIG } from "@/shared/config/site";
+
+// Mock data for development
+const mockPosts = [
+  {
+    id: '1',
+    slug: 'welcome-to-unidealog',
+    frontmatter: {
+      emoji: '🎉',
+      title: 'Welcome to Unidealog',
+      date: '2024-01-01',
+      author: 'Your Name',
+      tags: ['nextjs', 'shadcn-ui', 'blog'],
+      categories: ['announcement', 'featured'],
+      description: 'This is the first post on our new blog built with Next.js and shadcn/ui.'
+    },
+    content: 'Welcome to Unidealog! This is a modern blog platform...',
+    excerpt: 'This is the first post on our new blog built with Next.js and shadcn/ui.',
+    readingTime: 3
+  },
+  {
+    id: '2',
+    slug: 'getting-started-with-fsd',
+    frontmatter: {
+      emoji: '🏗️',
+      title: 'Getting Started with Feature-Sliced Design',
+      date: '2024-01-15',
+      author: 'Your Name',
+      tags: ['architecture', 'fsd', 'frontend'],
+      categories: ['development'],
+      description: 'Learn how to organize your code using the Feature-Sliced Design architecture.'
+    },
+    content: 'Feature-Sliced Design is a modern approach to frontend architecture...',
+    excerpt: 'Learn how to organize your code using the Feature-Sliced Design architecture.',
+    readingTime: 8
+  }
+];
 
 export default function Home() {
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <header className="row-start-1 w-full flex justify-end">
-        <ThemeToggle />
-      </header>
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <div className="flex items-center gap-4">
-          <Image
-            className="dark:invert"
-            src="/next.svg"
-            alt="Next.js logo"
-            width={180}
-            height={38}
-            priority
-          />
-          <span className="text-2xl font-bold">+ Unidealog</span>
-        </div>
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Modern blog with{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              Next.js & shadcn/ui
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            FSD architecture with TDD approach.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+    <HomePage
+      posts={mockPosts}
+      siteTitle={SITE_CONFIG.name}
+      author={SITE_CONFIG.author.name}
+      githubUrl={SITE_CONFIG.author.socialLinks.github}
+      bio={SITE_CONFIG.author.bio}
+    />
   );
 }

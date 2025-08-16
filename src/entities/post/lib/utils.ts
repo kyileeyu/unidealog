@@ -1,11 +1,5 @@
 import path from 'path';
-
-export interface TableOfContentsItem {
-  id: string;
-  title: string;
-  level: number;
-  children?: TableOfContentsItem[];
-}
+import { TableOfContentsItem } from '../model/types';
 
 /**
  * Calculate reading time based on word count
@@ -72,9 +66,9 @@ function buildTocTree(headings: { level: number; title: string; id: string }[]):
   
   for (const heading of headings) {
     const item: TableOfContentsItem = {
-      id: heading.id,
-      title: heading.title,
+      text: heading.title,
       level: heading.level,
+      anchor: heading.id,
       children: []
     };
     

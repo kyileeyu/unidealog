@@ -1,8 +1,9 @@
+'use client';
+
 import { Post } from '@/entities/post';
 import { Layout } from '@/widgets/layout';
 import { PostList } from '@/widgets/post-list';
 import { Bio } from '@/entities/user';
-import { cn } from '@/shared/lib/utils';
 
 interface HomePageProps {
   posts: Post[];
@@ -21,6 +22,19 @@ export function HomePage({
   bio,
   className
 }: HomePageProps) {
+  // Create user object for Bio component
+  const user = {
+    id: '1',
+    name: author,
+    bio: {
+      description: bio ? [bio] : [],
+      role: 'Developer'
+    },
+    social: {
+      github: githubUrl
+    }
+  };
+
   return (
     <Layout
       siteTitle={siteTitle}
@@ -34,9 +48,8 @@ export function HomePage({
         {bio && (
           <section className="mb-12">
             <Bio 
-              name={author}
-              bio={bio}
-              githubUrl={githubUrl}
+              user={user}
+              size="lg"
             />
           </section>
         )}
