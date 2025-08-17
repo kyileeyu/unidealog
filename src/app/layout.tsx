@@ -3,18 +3,7 @@ import { generateMetadata as createMetadata, generateJsonLd } from "@/shared/lib
 import { Analytics, JsonLd, SiteVerification } from "@/shared/ui/seo";
 import { SITE_CONFIG } from "@/shared/config/site";
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 export const metadata: Metadata = createMetadata({
   title: SITE_CONFIG.name,
@@ -42,10 +31,7 @@ export default function RootLayout({
           naver={process.env.NAVER_SITE_VERIFICATION}
         />
       </head>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-        suppressHydrationWarning
-      >
+      <body className="antialiased" suppressHydrationWarning>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

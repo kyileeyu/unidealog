@@ -8,6 +8,7 @@
 
 - **Frontend**: Next.js 13+ (App Router), TypeScript
 - **Styling**: Tailwind CSS, shadcn/ui
+- **Typography**: Pretendard (CDN)
 - **Content**: MDX (Markdown + JSX)
 - **Content Processing**: gray-matter, reading-time, next-mdx-remote
 - **Code Highlighting**: highlight.js
@@ -270,9 +271,10 @@ src/
 
 ### 타이포그래피
 
-- **Font Family**: Inter (Next.js 기본)
+- **Font Family**: Pretendard (CDN), -apple-system, BlinkMacSystemFont, system-ui, sans-serif
 - **Headings**: Bold, 다양한 크기
 - **Body**: Regular, 읽기 좋은 line-height
+- **Korean Support**: Pretendard로 한글 최적화
 
 ### 컴포넌트
 
