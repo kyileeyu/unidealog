@@ -1,54 +1,88 @@
 "use client";
 
-import { useEffect, useRef } from "react";
 import { useTheme } from "next-themes";
+import { useEffect, useRef } from "react";
 
-export interface UtterancesProps {
+export interface GiscusProps {
   repo: string;
-  issueTerm?: string;
-  label?: string;
+  repoId: string;
+  category: string;
+  categoryId: string;
+  mapping?: string;
+  strict?: string;
+  reactionsEnabled?: string;
+  emitMetadata?: string;
+  inputPosition?: "top" | "bottom";
+  lang?: string;
+  loading?: "lazy" | "eager";
   className?: string;
 }
 
-export function Utterances({
+export function GiscusComments({
   repo,
-  issueTerm = "pathname",
-  label,
-  className
-}: UtterancesProps) {
+  repoId,
+  category,
+  categoryId,
+  mapping = "pathname",
+  strict = "0",
+  reactionsEnabled = "1",
+  emitMetadata = "0",
+  inputPosition = "bottom",
+  lang = "ko",
+  loading = "lazy",
+  className,
+}: GiscusProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const { resolvedTheme } = useTheme();
 
   useEffect(() => {
     if (!containerRef.current) return;
 
-    // 기존 utterances 제거
-    const existingScript = containerRef.current.querySelector('.utterances');
+    // 기존 giscus 제거
+    const existingScript = containerRef.current.querySelector(".giscus");
     if (existingScript) {
       existingScript.remove();
     }
 
-    // utterances 스크립트 생성
-    const script = document.createElement('script');
-    script.src = 'https://utteranc.es/client.js';
-    script.setAttribute('repo', repo);
-    script.setAttribute('issue-term', issueTerm);
-    script.setAttribute('theme', resolvedTheme === 'dark' ? 'github-dark' : 'github-light');
-    script.setAttribute('crossorigin', 'anonymous');
+    // giscus 스크립트 생성
+    const script = document.createElement("script");
+    script.src = "https://giscus.app/client.js";
+    script.setAttribute("data-repo", repo);
+    script.setAttribute("data-repo-id", repoId);
+    script.setAttribute("data-category", category);
+    script.setAttribute("data-category-id", categoryId);
+    script.setAttribute("data-mapping", mapping);
+    script.setAttribute("data-strict", strict);
+    script.setAttribute("data-reactions-enabled", reactionsEnabled);
+    script.setAttribute("data-emit-metadata", emitMetadata);
+    script.setAttribute("data-input-position", inputPosition);
+    script.setAttribute(
+      "data-theme",
+      resolvedTheme === "dark" ? "dark" : "light"
+    );
+    script.setAttribute("data-lang", lang);
+    script.setAttribute("data-loading", loading);
+    script.setAttribute("crossorigin", "anonymous");
     script.async = true;
 
-    if (label) {
-      script.setAttribute('label', label);
-    }
-
     containerRef.current.appendChild(script);
-  }, [repo, issueTerm, label, resolvedTheme]);
+  }, [
+    repo,
+    repoId,
+    category,
+    categoryId,
+    mapping,
+    strict,
+    reactionsEnabled,
+    emitMetadata,
+    inputPosition,
+    lang,
+    loading,
+    resolvedTheme,
+  ]);
 
   return (
-    <div 
-      ref={containerRef} 
-      className={`utterances-container ${className}`}
-    />
+    <div ref={containerRef} className={`giscus-container ${className || ""}`} />
   );
 }
 
@@ -58,17 +92,27 @@ export interface CommentsProps {
 }
 
 export function Comments({ className }: CommentsProps) {
-  // 실제 GitHub 저장소 설정이 필요합니다
-  const repo = "kyileeyu/unidealog"; // 실제 저장소로 변경 필요
-  
+  // Giscus 설정 - 실제 값으로 변경 필요
+  const config = {
+    repo: "kyileeyu/unidealog", // GitHub 저장소
+    repoId: "R_kgDOPe2rzw", // 저장소 ID (giscus.app에서 생성)
+    category: "General", // Discussion 카테고리
+    categoryId: "DIC_kwDOPe2rz84CuQh8", // 카테고리 ID (giscus.app에서 생성)
+  };
+
   return (
-    <div className={`comments-section ${className}`}>
+    <div className={`comments-section ${className || ""}`}>
       <div className="border-t pt-8">
-        <h3 className="text-lg font-semibold mb-4">댓글</h3>
-        <Utterances 
-          repo={repo}
-          issueTerm="pathname"
-          label="💬 comment"
+        <GiscusComments
+          repo={config.repo}
+          repoId={config.repoId}
+          category={config.category}
+          categoryId={config.categoryId}
+          mapping="pathname"
+          reactionsEnabled="1"
+          emitMetadata="0"
+          inputPosition="bottom"
+          lang="ko"
         />
       </div>
     </div>

@@ -31,11 +31,13 @@
 #### 🐛 발견된 문제점들
 
 1. **PostContent 마크다운 렌더링 이슈**
+
    - 현재 상태: raw 마크다운이 그대로 표시됨
    - 원인: `@tailwindcss/typography` 미설치 + MDX 파서 부재
    - 해결 예정: next-mdx-remote 또는 @next/mdx 도입
 
 2. **PostNavigation 렌더링 실패**
+
    - 현재 상태: 네비게이션이 화면에 나타나지 않음
    - 원인: 데이터 구조 불일치 + 이전/다음 포스트 로직 누락
    - 해결 예정: Post 타입 정의 수정 + 네비게이션 데이터 전달 로직 구현
@@ -47,6 +49,7 @@
 ### 🎯 긴급 수정 계획
 
 #### Phase A: PostContent 마크다운 렌더링 수정
+
 - [x] `@tailwindcss/typography` 플러그인 설치
 - [x] `next-mdx-remote` 및 rehype 플러그인들 설치 및 설정
 - [x] `PostContent` 컴포넌트 MDX 렌더링으로 변경
@@ -54,6 +57,7 @@
 - [x] MDX 커스텀 컴포넌트 시스템 구축
 
 #### Phase B: PostNavigation 기능 복구
+
 - [x] `Post` 인터페이스 `wordCount` 속성 추가
 - [x] 포스트 상세 페이지에서 이전/다음 포스트 데이터 로직 구현
 - [x] `getPostNavigation` 함수와 연동
@@ -62,17 +66,20 @@
 #### ✅ 최근 완료된 수정사항 (2025-08-16)
 
 1. **MDX 렌더링 시스템 완전 구축**
+
    - `next-mdx-remote` 기반 MDX 프로세서 구현
    - rehype-highlight, rehype-slug, rehype-autolink-headings 플러그인 추가
    - 커스텀 MDX 컴포넌트 시스템 구축 (헤딩, 코드블록, 링크 등)
    - PostContent 컴포넌트를 MDX 렌더링으로 전환
 
 2. **코드 하이라이팅 시스템 추가**
+
    - highlight.js 통합
    - GitHub Dark 테마 적용
    - 자동 언어 감지 기능
 
 3. **PostNavigation 기능 복구**
+
    - Post 타입에 wordCount 속성 추가
    - 포스트 상세 페이지에서 네비게이션 데이터 계산 로직 구현
    - 이전/다음 포스트 연결 완료
@@ -82,6 +89,7 @@
    - 전체 시스템 타입 호환성 확보
 
 #### Phase C: MDX 고급 기능 추가
+
 - [ ] 커스텀 MDX 컴포넌트 지원
 - [ ] 수식 렌더링 (KaTeX 또는 MathJax)
 - [ ] 이미지 최적화 및 갤러리 기능
@@ -105,13 +113,13 @@
 
 ```markdown
 ---
-emoji: '🎯'
-title: '새로운 포스트 제목'
-date: '2024-01-16'
-author: 'Your Name'
-tags: ['nextjs', 'blog']
-categories: ['development']
-description: '포스트 설명'
+emoji: "🎯"
+title: "새로운 포스트 제목"
+date: "2024-01-16"
+author: "Your Name"
+tags: ["nextjs", "blog"]
+categories: ["development"]
+description: "포스트 설명"
 ---
 
 # 포스트 내용
@@ -206,8 +214,6 @@ src/
 - **widgets**: 여러 entities와 features를 조합한 복합 UI
 - **pages**: 라우팅되는 페이지들
 
-## 🚀 구현 로드맵
-
 ### ✅ Phase 0: 프로젝트 초기 설정
 
 - [x] Next.js 프로젝트 생성
@@ -234,7 +240,7 @@ src/
 - [x] **Post Search**: 포스트 검색 기능 (검색 로직, 상태 관리 구현)
 - [x] **Theme Switch**: 다크/라이트 테마 토글
 - [x] **Post Navigation**: 이전/다음 포스트 네비게이션
-- [x] **Comments**: 댓글 시스템 (utterances)
+- [x] **Comments**: 댓글 시스템 (Giscus - GitHub Discussions 기반, 완전 무료)
 
 ### ✅ Phase 4: Widgets Layer - 복합 UI 컴포넌트
 

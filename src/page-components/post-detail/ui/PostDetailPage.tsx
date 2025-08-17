@@ -1,16 +1,16 @@
-import { Post } from '@/entities/post';
-import { Layout } from '@/widgets/layout';
-import { PostContent } from '@/widgets/post-content';
-import { PostNavigation } from '@/features/post-navigation';
-import { Comments } from '@/features/comments';
-import { Badge } from '@/shared/ui/badge';
-import { Separator } from '@/shared/ui/separator';
-import { CalendarDays, Clock, User } from 'lucide-react';
+import { Post } from "@/entities/post";
+import { Comments } from "@/features/comments";
+import { PostNavigation } from "@/features/post-navigation";
+import { Badge } from "@/shared/ui/badge";
+import { Separator } from "@/shared/ui/separator";
+import { Layout } from "@/widgets/layout";
+import { PostContent } from "@/widgets/post-content";
+import { CalendarDays, Clock, User } from "lucide-react";
 
 interface PostDetailPageProps {
   post: Post;
-  previousPost?: Pick<Post, 'id' | 'slug' | 'frontmatter'>;
-  nextPost?: Pick<Post, 'id' | 'slug' | 'frontmatter'>;
+  previousPost?: Pick<Post, "id" | "slug" | "frontmatter">;
+  nextPost?: Pick<Post, "id" | "slug" | "frontmatter">;
   siteTitle: string;
   author: string;
   githubUrl?: string;
@@ -18,10 +18,10 @@ interface PostDetailPageProps {
 }
 
 function formatDate(dateString: string): string {
-  return new Date(dateString).toLocaleDateString('ko-KR', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric'
+  return new Date(dateString).toLocaleDateString("ko-KR", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
   });
 }
 
@@ -32,10 +32,10 @@ export function PostDetailPage({
   siteTitle,
   author,
   githubUrl,
-  className
+  className,
 }: PostDetailPageProps) {
   const { frontmatter } = post;
-  
+
   return (
     <Layout
       siteTitle={siteTitle}
@@ -50,7 +50,11 @@ export function PostDetailPage({
           {frontmatter.categories && frontmatter.categories.length > 0 && (
             <div className="mb-4">
               {frontmatter.categories.map((category, index) => (
-                <Badge key={index} variant="secondary" className="mr-2 capitalize">
+                <Badge
+                  key={index}
+                  variant="secondary"
+                  className="mr-2 capitalize"
+                >
                   {category}
                 </Badge>
               ))}
@@ -78,7 +82,7 @@ export function PostDetailPage({
               <User className="h-4 w-4" />
               <span>{frontmatter.author || author}</span>
             </div>
-            
+
             <div className="flex items-center gap-1">
               <CalendarDays className="h-4 w-4" />
               <time dateTime={frontmatter.date}>
@@ -120,20 +124,24 @@ export function PostDetailPage({
           <div className="mb-12">
             <PostNavigation
               navigation={{
-                prev: previousPost ? {
-                  ...previousPost,
-                  content: '',
-                  excerpt: '',
-                  readingTime: 0,
-                  wordCount: 0
-                } : null,
-                next: nextPost ? {
-                  ...nextPost,
-                  content: '',
-                  excerpt: '',
-                  readingTime: 0,
-                  wordCount: 0
-                } : null
+                prev: previousPost
+                  ? {
+                      ...previousPost,
+                      content: "",
+                      excerpt: "",
+                      readingTime: 0,
+                      wordCount: 0,
+                    }
+                  : null,
+                next: nextPost
+                  ? {
+                      ...nextPost,
+                      content: "",
+                      excerpt: "",
+                      readingTime: 0,
+                      wordCount: 0,
+                    }
+                  : null,
               }}
             />
           </div>
