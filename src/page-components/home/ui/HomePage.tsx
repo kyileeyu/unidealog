@@ -18,22 +18,8 @@ export function HomePage({
   siteTitle,
   author,
   githubUrl,
-  bio,
   className,
 }: HomePageProps) {
-  // Create user object for Bio component
-  const user = {
-    id: "1",
-    name: author,
-    bio: {
-      description: bio ? [bio] : [],
-      role: "Developer",
-    },
-    social: {
-      github: githubUrl,
-    },
-  };
-
   return (
     <Layout
       siteTitle={siteTitle}

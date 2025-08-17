@@ -8,14 +8,22 @@ export default function About() {
     name: SITE_CONFIG.author.name,
     email: SITE_CONFIG.author.email,
     bio: {
-      // role: 'Full-stack Developer',
+      role: 'Creator',
       description: [SITE_CONFIG.author.bio],
       location: "Seoul, Korea",
     },
     social: SITE_CONFIG.author.socialLinks,
   };
 
-  const projects = [
+  const projects: Array<{
+    title: string;
+    description: string;
+    techStack: string[];
+    links: {
+      github?: string;
+      demo?: string;
+    };
+  }> = [
     // {
     //   title: "Unidealog",
     //   description: "Next.js와 shadcn/ui로 구축한 현대적인 블로그 플랫폼",

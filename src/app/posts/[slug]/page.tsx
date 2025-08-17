@@ -5,9 +5,9 @@ import { PostDetailPage } from '@/page-components/post-detail';
 import { SITE_CONFIG } from '@/shared/config/site';
 
 interface PostPageProps {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
 
 // 정적 경로 생성
@@ -21,7 +21,8 @@ export async function generateStaticParams() {
 
 // 메타데이터 생성
 export async function generateMetadata({ params }: PostPageProps) {
-  const post = getPostBySlug(params.slug);
+  const resolvedParams = await params;
+  const post = getPostBySlug(resolvedParams.slug);
   
   if (!post) {
     return {
@@ -50,8 +51,9 @@ export async function generateMetadata({ params }: PostPageProps) {
   };
 }
 
-export default function PostPage({ params }: PostPageProps) {
-  const post = getPostBySlug(params.slug);
+export default async function PostPage({ params }: PostPageProps) {
+  const resolvedParams = await params;
+  const post = getPostBySlug(resolvedParams.slug);
 
   if (!post) {
     notFound();
@@ -59,7 +61,7 @@ export default function PostPage({ params }: PostPageProps) {
 
   // 네비게이션 계산
   const allPosts = getAllPosts();
-  const navigation = getPostNavigation(allPosts, params.slug);
+  const navigation = getPostNavigation(allPosts, resolvedParams.slug);
 
   return (
     <PostDetailPage 

@@ -1,0 +1,92 @@
+{
+  "Blog Post Template": {
+    "scope": "mdx",
+    "prefix": "temp",
+    "description": "블로그 포스트 기본 템플릿",
+    "body": [
+      "---",
+      "emoji: '📝'",
+      "title: '$1'",
+      "date: '${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}'",
+      "author: '$2'",
+      "tags: ['$3']",
+      "categories: ['$4']",
+      "description: '$5'",
+      "---",
+      "",
+      "# $1",
+      "",
+      "$0"
+    ]
+  },
+
+  "Development Post": {
+    "scope": "mdx",
+    "prefix": "dev",
+    "description": "개발 관련 포스트 템플릿",
+    "body": [
+      "---",
+      "emoji: '⚡'",
+      "title: '$1'",
+      "date: '${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}'",
+      "author: '$2'",
+      "tags: ['$3', 'development']",
+      "categories: ['development']",
+      "description: '$4'",
+      "---",
+      "",
+      "# $1",
+      "",
+      "## 개요",
+      "",
+      "$5",
+      "",
+      "## 구현",
+      "",
+      "```${6:javascript}",
+      "$7",
+      "```",
+      "",
+      "## 결론",
+      "",
+      "$0"
+    ]
+  },
+
+  "Tutorial Post": {
+    "scope": "mdx",
+    "prefix": "tutorial",
+    "description": "튜토리얼 포스트 템플릿",
+    "body": [
+      "---",
+      "emoji: '📚'",
+      "title: '$1'",
+      "date: '${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}'",
+      "author: '$2'",
+      "tags: ['$3', 'tutorial']",
+      "categories: ['tutorial']",
+      "description: '$4'",
+      "---",
+      "",
+      "# $1",
+      "",
+      "## 준비사항",
+      "",
+      "- $5",
+      "",
+      "## 단계별 진행",
+      "",
+      "### 1단계: $6",
+      "",
+      "$7",
+      "",
+      "### 2단계: $8",
+      "",
+      "$9",
+      "",
+      "## 마무리",
+      "",
+      "$0"
+    ]
+  }
+}

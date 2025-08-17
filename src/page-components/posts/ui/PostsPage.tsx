@@ -4,7 +4,7 @@ import { Post } from '@/entities/post';
 import { Layout } from '@/widgets/layout';
 import { PostList } from '@/widgets/post-list';
 import { Badge } from '@/shared/ui/badge';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 
 interface PostsPageProps {
@@ -15,7 +15,7 @@ interface PostsPageProps {
   className?: string;
 }
 
-export function PostsPage({
+function PostsContent({
   posts,
   categories,
   siteTitle,
@@ -122,5 +122,13 @@ export function PostsPage({
         </section>
       </div>
     </Layout>
+  );
+}
+
+export function PostsPage(props: PostsPageProps) {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <PostsContent {...props} />
+    </Suspense>
   );
 }
