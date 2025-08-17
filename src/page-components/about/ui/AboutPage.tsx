@@ -1,8 +1,8 @@
-import { Layout } from '@/widgets/layout';
-import { Bio } from '@/entities/user';
-import { Card, CardContent, CardHeader, CardTitle } from '@/shared/ui/card';
-import { Badge } from '@/shared/ui/badge';
-import { User } from '@/entities/user/model/types';
+import { Bio } from "@/entities/user";
+import { User } from "@/entities/user/model/types";
+import { Badge } from "@/shared/ui/badge";
+import { Card, CardContent, CardHeader, CardTitle } from "@/shared/ui/card";
+import { Layout } from "@/widgets/layout";
 
 interface AboutPageProps {
   siteTitle: string;
@@ -30,7 +30,7 @@ interface TimelineItem {
   date: string;
   title: string;
   description: string;
-  type: 'work' | 'education' | 'project' | 'achievement';
+  type: "work" | "hobby" | "project" | "achievement";
 }
 
 export function AboutPage({
@@ -41,7 +41,7 @@ export function AboutPage({
   projects = [],
   skills = [],
   timeline = [],
-  className
+  className,
 }: AboutPageProps) {
   return (
     <Layout
@@ -54,9 +54,7 @@ export function AboutPage({
         {/* Header */}
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold mb-4">About Me</h1>
-          <p className="text-xl text-muted-foreground">
-            개발자로서의 여정과 경험을 소개합니다
-          </p>
+          <p className="text-xl text-muted-foreground">웰-컴!</p>
         </div>
 
         {/* Bio Section */}
@@ -105,12 +103,20 @@ export function AboutPage({
                 <div className="grid gap-6 md:grid-cols-2">
                   {projects.map((project, index) => (
                     <div key={index} className="p-4 border rounded-lg">
-                      <h3 className="font-semibold text-lg mb-2">{project.title}</h3>
-                      <p className="text-muted-foreground mb-3">{project.description}</p>
-                      
+                      <h3 className="font-semibold text-lg mb-2">
+                        {project.title}
+                      </h3>
+                      <p className="text-muted-foreground mb-3">
+                        {project.description}
+                      </p>
+
                       <div className="flex flex-wrap gap-1 mb-3">
                         {project.techStack.map((tech, techIndex) => (
-                          <Badge key={techIndex} variant="outline" className="text-xs">
+                          <Badge
+                            key={techIndex}
+                            variant="outline"
+                            className="text-xs"
+                          >
                             {tech}
                           </Badge>
                         ))}
@@ -173,17 +179,28 @@ export function AboutPage({
                       <div className="flex-shrink-0 w-2 h-2 rounded-full bg-blue-500 mt-2"></div>
                       <div className="flex-1">
                         <div className="flex items-center gap-2 mb-1">
-                          <span className="text-sm text-muted-foreground">{item.date}</span>
-                          <Badge variant={
-                            item.type === 'work' ? 'default' :
-                            item.type === 'education' ? 'secondary' :
-                            item.type === 'project' ? 'outline' : 'destructive'
-                          } className="text-xs">
+                          <span className="text-sm text-muted-foreground">
+                            {item.date}
+                          </span>
+                          <Badge
+                            variant={
+                              item.type === "work"
+                                ? "default"
+                                : item.type === "hobby"
+                                ? "secondary"
+                                : item.type === "project"
+                                ? "outline"
+                                : "destructive"
+                            }
+                            className="text-xs"
+                          >
                             {item.type}
                           </Badge>
                         </div>
                         <h4 className="font-semibold">{item.title}</h4>
-                        <p className="text-muted-foreground text-sm">{item.description}</p>
+                        <p className="text-muted-foreground text-sm">
+                          {item.description}
+                        </p>
                       </div>
                     </div>
                   ))}
@@ -204,18 +221,18 @@ export function AboutPage({
             </CardHeader>
             <CardContent>
               <p className="text-muted-foreground mb-4">
-                프로젝트 협업이나 기술적인 이야기를 나누고 싶으시면 언제든 연락주세요!
+                이야기를 나누고 싶으시다면 편하게 연락주세요!
               </p>
               <div className="flex items-center space-x-4">
-                {user.social?.email && (
+                {user.email && (
                   <a
-                    href={`mailto:${user.social.email}`}
+                    href={`mailto:${user.email}`}
                     className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300"
                   >
                     Email
                   </a>
                 )}
-                {user.social?.github && (
+                {/* {user.social?.github && (
                   <a
                     href={user.social.github}
                     target="_blank"
@@ -234,7 +251,7 @@ export function AboutPage({
                   >
                     LinkedIn
                   </a>
-                )}
+                )} */}
               </div>
             </CardContent>
           </Card>

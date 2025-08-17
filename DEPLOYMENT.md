@@ -3,22 +3,27 @@
 ## 필수 환경변수
 
 ### 사이트 정보
+
 NEXT_PUBLIC_SITE_URL=https://your-domain.vercel.app
-NEXT_PUBLIC_SITE_NAME=Unidealog
-NEXT_PUBLIC_SITE_DESCRIPTION=Modern blog with Next.js and shadcn/ui
+NEXT_PUBLIC_SITE_NAME=UnIdealog
+NEXT_PUBLIC_SITE_DESCRIPTION=
 
 ### SEO 및 검색엔진 최적화
+
 GOOGLE_SITE_VERIFICATION=your_google_verification_code
 NAVER_SITE_VERIFICATION=your_naver_verification_code
 
 ### Analytics (선택사항)
+
 GOOGLE_ANALYTICS_ID=G-XXXXXXXXXX
 
 ### 소셜 미디어
+
 NEXT_PUBLIC_TWITTER_HANDLE=@yourusername
-NEXT_PUBLIC_GITHUB_USERNAME=yourusername
+NEXT_PUBLIC_GITHUB_USERNAME=kyileeyu
 
 ### 댓글 시스템 (utterances)
+
 NEXT_PUBLIC_UTTERANCES_REPO=yourusername/unidealog-comments
 
 ## Vercel CLI로 환경변수 설정

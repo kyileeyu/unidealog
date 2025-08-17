@@ -1,9 +1,8 @@
-'use client';
+"use client";
 
-import { Post } from '@/entities/post';
-import { Layout } from '@/widgets/layout';
-import { PostList } from '@/widgets/post-list';
-import { Bio } from '@/entities/user';
+import { Post } from "@/entities/post";
+import { Layout } from "@/widgets/layout";
+import { PostList } from "@/widgets/post-list";
 
 interface HomePageProps {
   posts: Post[];
@@ -20,19 +19,19 @@ export function HomePage({
   author,
   githubUrl,
   bio,
-  className
+  className,
 }: HomePageProps) {
   // Create user object for Bio component
   const user = {
-    id: '1',
+    id: "1",
     name: author,
     bio: {
       description: bio ? [bio] : [],
-      role: 'Developer'
+      role: "Developer",
     },
     social: {
-      github: githubUrl
-    }
+      github: githubUrl,
+    },
   };
 
   return (
@@ -45,14 +44,14 @@ export function HomePage({
     >
       <div className="container mx-auto px-4 py-8">
         {/* Bio Section */}
-        {bio && (
+        {/* {bio && (
           <section className="mb-12">
             <Bio 
               user={user}
               size="lg"
             />
           </section>
-        )}
+        )} */}
 
         {/* Posts Section */}
         <section>
@@ -60,8 +59,8 @@ export function HomePage({
             <h2 className="text-2xl font-bold mb-2">Recent Posts</h2>
             <p className="text-muted-foreground">최신 포스트를 확인해보세요</p>
           </div>
-          
-          <PostList 
+
+          <PostList
             posts={posts}
             variant="grid"
             emptyMessage="아직 작성된 포스트가 없습니다."

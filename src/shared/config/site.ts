@@ -7,7 +7,7 @@ export const SITE_CONFIG = {
   author: {
     name: "Seunghyun Yu",
     email: "kyileeeyu@gmail.com",
-    bio: "Full-stack developer passionate about web technologies",
+    bio: "이 공간의 주인입니다",
     avatar: "/images/avatar.jpg",
     socialLinks: {
       github: `https://github.com/${
