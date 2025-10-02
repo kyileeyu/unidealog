@@ -4,44 +4,49 @@ import { Thread, ThreadCard } from "@/entities/thread";
 import { Badge } from "@/shared/ui/badge";
 import { Card, CardContent } from "@/shared/ui/card";
 import { Layout } from "@/widgets/layout";
+import { SITE_CONFIG } from "@/shared/config/site";
 
 interface AboutPageProps {
-  siteTitle: string;
-  author: string;
-  githubUrl?: string;
-  user: User;
   threads?: Thread[];
-  skills?: string[];
   className?: string;
 }
 
 export function AboutPage({
-  siteTitle,
-  author,
-  githubUrl,
-  user,
   threads = [],
-  skills = [],
   className,
 }: AboutPageProps) {
+  const user: User = {
+    id: SITE_CONFIG.author.id,
+    name: SITE_CONFIG.author.name,
+    email: SITE_CONFIG.author.email,
+    avatar: SITE_CONFIG.author.avatar,
+    bio: {
+      role: SITE_CONFIG.author.bio.role,
+      description: [...SITE_CONFIG.author.bio.description],
+      location: SITE_CONFIG.author.bio.location,
+    },
+    social: {
+      github: SITE_CONFIG.author.socialLinks.github,
+      linkedin: SITE_CONFIG.author.socialLinks.linkedin,
+    },
+  };
+
   return (
     <Layout
-      siteTitle={siteTitle}
-      author={author}
-      githubUrl={githubUrl}
+      siteTitle={SITE_CONFIG.name}
+      author={SITE_CONFIG.author.name}
+      githubUrl={SITE_CONFIG.author.socialLinks.github}
       className={className}
     >
       <div className="container mx-auto px-4 py-8 max-w-2xl">
-        {/* Profile Header */}
         <section className="mb-8">
           <Card>
             <CardContent className="pt-6">
               <Bio user={user} size="lg" />
 
-              {/* Skills Tags */}
-              {skills.length > 0 && (
+              {SITE_CONFIG.author.skills.length > 0 && (
                 <div className="flex flex-wrap gap-2 mt-6 justify-center">
-                  {skills.map((skill, index) => (
+                  {SITE_CONFIG.author.skills.map((skill, index) => (
                     <Badge key={index} variant="secondary" className="text-xs">
                       {skill}
                     </Badge>
@@ -52,7 +57,6 @@ export function AboutPage({
           </Card>
         </section>
 
-        {/* Threads Section */}
         {threads.length > 0 && (
           <section>
             <div className="space-y-4">
