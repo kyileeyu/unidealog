@@ -6,24 +6,15 @@ import { PostList } from "@/widgets/post-list";
 
 interface HomePageProps {
   posts: Post[];
-  siteTitle: string;
-  author: string;
-  githubUrl?: string;
   className?: string;
 }
 
 export function HomePage({
   posts,
-  siteTitle,
-  author,
-  githubUrl,
   className,
 }: HomePageProps) {
   return (
     <Layout
-      siteTitle={siteTitle}
-      author={author}
-      githubUrl={githubUrl}
       posts={posts}
       className={className}
     >

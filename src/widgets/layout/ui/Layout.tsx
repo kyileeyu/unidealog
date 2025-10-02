@@ -6,9 +6,6 @@ import { cn } from '@/shared/lib/utils';
 
 interface LayoutProps {
   children: ReactNode;
-  siteTitle: string;
-  author: string;
-  githubUrl?: string;
   posts?: Post[];
   className?: string;
   showHeader?: boolean;
@@ -17,9 +14,6 @@ interface LayoutProps {
 
 export function Layout({
   children,
-  siteTitle,
-  author,
-  githubUrl,
   posts = [],
   className,
   showHeader = true,
@@ -27,25 +21,16 @@ export function Layout({
 }: LayoutProps) {
   return (
     <div className={cn("min-h-screen flex flex-col", className)}>
-      {/* Header */}
       {showHeader && (
-        <PageHeader 
-          siteTitle={siteTitle} 
-          posts={posts}
-        />
+        <PageHeader posts={posts} />
       )}
 
-      {/* Main Content */}
       <main className="flex-1">
         {children}
       </main>
 
-      {/* Footer */}
       {showFooter && (
-        <PageFooter 
-          author={author}
-          githubUrl={githubUrl}
-        />
+        <PageFooter />
       )}
     </div>
   );

@@ -4,16 +4,15 @@ import { Post } from "@/entities/post";
 import { PostSearch } from "@/features/post-search/ui/PostSearch";
 import { cn } from "@/shared/lib/utils";
 import { ThemeToggle } from "@/shared/ui/theme-toggle";
+import { SITE_CONFIG } from "@/shared/config/site";
 import Link from "next/link";
 
 interface PageHeaderProps {
-  siteTitle: string;
   posts?: Post[];
   className?: string;
 }
 
 export function PageHeader({
-  siteTitle,
   posts = [],
   className,
 }: PageHeaderProps) {
@@ -21,17 +20,15 @@ export function PageHeader({
     <header className={cn("page-header-wrapper border-b", className)}>
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between py-4">
-          {/* Front Section - Site Title */}
           <div className="front-section">
             <Link
               href="/"
               className="text-xl font-bold text-foreground hover:text-primary transition-colors"
             >
-              {siteTitle}
+              {SITE_CONFIG.name}
             </Link>
           </div>
 
-          {/* Trailing Section - Navigation & Search */}
           <div className="trailing-section flex items-center gap-6">
             <nav className="hidden md:flex items-center gap-4">
               <Link
@@ -48,10 +45,7 @@ export function PageHeader({
               </Link>
             </nav>
 
-            {/* Post Search */}
             <PostSearch posts={posts} />
-
-            {/* Theme Toggle */}
             <ThemeToggle />
           </div>
         </div>

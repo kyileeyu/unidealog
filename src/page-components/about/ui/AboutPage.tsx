@@ -32,12 +32,7 @@ export function AboutPage({
   };
 
   return (
-    <Layout
-      siteTitle={SITE_CONFIG.name}
-      author={SITE_CONFIG.author.name}
-      githubUrl={SITE_CONFIG.author.socialLinks.github}
-      className={className}
-    >
+    <Layout className={className}>
       <div className="container mx-auto px-4 py-8 max-w-2xl">
         <section className="mb-8">
           <Card>

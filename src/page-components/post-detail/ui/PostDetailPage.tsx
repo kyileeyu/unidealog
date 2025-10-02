@@ -5,15 +5,13 @@ import { Badge } from "@/shared/ui/badge";
 import { Separator } from "@/shared/ui/separator";
 import { Layout } from "@/widgets/layout";
 import { PostContent } from "@/widgets/post-content";
+import { SITE_CONFIG } from "@/shared/config/site";
 import { CalendarDays, Clock, User } from "lucide-react";
 
 interface PostDetailPageProps {
   post: Post;
   previousPost?: Pick<Post, "id" | "slug" | "frontmatter">;
   nextPost?: Pick<Post, "id" | "slug" | "frontmatter">;
-  siteTitle: string;
-  author: string;
-  githubUrl?: string;
   className?: string;
 }
 
@@ -29,20 +27,12 @@ export function PostDetailPage({
   post,
   previousPost,
   nextPost,
-  siteTitle,
-  author,
-  githubUrl,
   className,
 }: PostDetailPageProps) {
   const { frontmatter } = post;
 
   return (
-    <Layout
-      siteTitle={siteTitle}
-      author={author}
-      githubUrl={githubUrl}
-      className={className}
-    >
+    <Layout className={className}>
       <article className="container mx-auto px-4 py-8 max-w-4xl">
         {/* Post Header */}
         <header className="mb-8">
@@ -80,7 +70,7 @@ export function PostDetailPage({
           <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground mb-6">
             <div className="flex items-center gap-1">
               <User className="h-4 w-4" />
-              <span>{frontmatter.author || author}</span>
+              <span>{frontmatter.author || SITE_CONFIG.author.name}</span>
             </div>
 
             <div className="flex items-center gap-1">

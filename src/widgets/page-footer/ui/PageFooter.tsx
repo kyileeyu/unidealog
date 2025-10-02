@@ -1,13 +1,12 @@
 import Link from 'next/link';
 import { cn } from '@/shared/lib/utils';
+import { SITE_CONFIG } from '@/shared/config/site';
 
 interface PageFooterProps {
-  author: string;
-  githubUrl?: string;
   className?: string;
 }
 
-export function PageFooter({ author, githubUrl, className }: PageFooterProps) {
+export function PageFooter({ className }: PageFooterProps) {
   const currentYear = new Date().getFullYear();
 
   return (
@@ -15,17 +14,17 @@ export function PageFooter({ author, githubUrl, className }: PageFooterProps) {
       <div className="container mx-auto px-4 py-6">
         <p className="text-center text-sm text-muted-foreground">
           © {currentYear}
-          {githubUrl ? (
-            <Link 
-              href={githubUrl}
+          {SITE_CONFIG.author.socialLinks.github ? (
+            <Link
+              href={SITE_CONFIG.author.socialLinks.github}
               target="_blank"
               rel="noopener noreferrer"
               className="ml-1 hover:text-foreground transition-colors"
             >
-              {author}
+              {SITE_CONFIG.author.name}
             </Link>
           ) : (
-            <span className="ml-1">{author}</span>
+            <span className="ml-1">{SITE_CONFIG.author.name}</span>
           )}
           <span className="mx-1">powered by</span>
           <Link 

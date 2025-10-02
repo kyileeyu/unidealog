@@ -76,8 +76,6 @@ export default async function PostPage({ params }: PostPageProps) {
         slug: navigation.next.slug,
         frontmatter: navigation.next.frontmatter
       } : undefined}
-      siteTitle={SITE_CONFIG.name}
-      author={SITE_CONFIG.author.name}
     />
   );
 }

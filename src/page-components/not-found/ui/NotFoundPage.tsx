@@ -7,25 +7,14 @@ import { Card, CardContent } from '@/shared/ui/card';
 import { Home, Search, ArrowLeft } from 'lucide-react';
 
 interface NotFoundPageProps {
-  siteTitle: string;
-  author: string;
-  githubUrl?: string;
   className?: string;
 }
 
 export function NotFoundPage({
-  siteTitle,
-  author,
-  githubUrl,
   className
 }: NotFoundPageProps) {
   return (
-    <Layout
-      siteTitle={siteTitle}
-      author={author}
-      githubUrl={githubUrl}
-      className={className}
-    >
+    <Layout className={className}>
       <div className="container mx-auto px-4 py-16">
         <Card className="max-w-2xl mx-auto">
           <CardContent className="flex flex-col items-center justify-center py-16 text-center">
