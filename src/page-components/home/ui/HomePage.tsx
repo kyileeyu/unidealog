@@ -9,7 +9,6 @@ interface HomePageProps {
   siteTitle: string;
   author: string;
   githubUrl?: string;
-  bio?: string;
   className?: string;
 }
 

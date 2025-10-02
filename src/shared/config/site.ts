@@ -5,9 +5,14 @@ export const SITE_CONFIG = {
   description: process.env.NEXT_PUBLIC_SITE_DESCRIPTION || "nana",
   url: process.env.NEXT_PUBLIC_SITE_URL || "https://unidealog.vercel.app",
   author: {
+    id: "1",
     name: "Seunghyun Yu",
     email: "kyileeeyu@gmail.com",
-    bio: "이 공간의 주인입니다",
+    bio: {
+      role: "Creator",
+      description: ["이 공간의 주인입니다"],
+      location: "Seoul, Korea",
+    },
     avatar: "/images/avatar.jpg",
     socialLinks: {
       github: `https://github.com/${
@@ -15,6 +20,21 @@ export const SITE_CONFIG = {
       }`,
       linkedin: "https://linkedin.com/in/seunghyun-yu",
     },
+    skills: [
+      "People Insight",
+      "Books",
+      "Meditation",
+      "Philosophy",
+      "Law of Attraction",
+      "Writing",
+      "Baking",
+      "MBTI",
+      "Running",
+      "Freediving",
+      "Mindfulness",
+      "Digital Nomad",
+      "Prompting",
+    ],
   },
   navigation: [
     { title: "Home", href: "/" },

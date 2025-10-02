@@ -1,38 +1,26 @@
 import { AboutPage } from "@/page-components/about";
 import { SITE_CONFIG } from "@/shared/config/site";
 import { getThreads } from "@/entities/thread/lib/threads";
+import { User } from "@/entities/user/model/types";
 
 export default async function About() {
-  // Create user object for AboutPage
-  const user = {
-    id: "1",
+  const threads = await getThreads();
+
+  const user: User = {
+    id: SITE_CONFIG.author.id,
     name: SITE_CONFIG.author.name,
     email: SITE_CONFIG.author.email,
+    avatar: SITE_CONFIG.author.avatar,
     bio: {
-      role: 'Creator',
-      description: [SITE_CONFIG.author.bio],
-      location: "Seoul, Korea",
+      role: SITE_CONFIG.author.bio.role,
+      description: [...SITE_CONFIG.author.bio.description],
+      location: SITE_CONFIG.author.bio.location,
     },
-    social: SITE_CONFIG.author.socialLinks,
+    social: {
+      github: SITE_CONFIG.author.socialLinks.github,
+      linkedin: SITE_CONFIG.author.socialLinks.linkedin,
+    },
   };
-
-  const skills = [
-    "People Insight",
-    "Books",
-    "Meditation",
-    "Philosophy",
-    "Law of Attraction",
-    "Writing",
-    "Baking",
-    "MBTI",
-    "Running",
-    "Freediving",
-    "Mindfulness",
-    "Digital Nomad",
-    "Prompting",
-  ];
-
-  const threads = await getThreads();
 
   return (
     <AboutPage
@@ -41,7 +29,7 @@ export default async function About() {
       githubUrl={SITE_CONFIG.author.socialLinks.github}
       user={user}
       threads={threads}
-      skills={skills}
+      skills={[...SITE_CONFIG.author.skills]}
     />
   );
 }

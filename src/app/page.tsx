@@ -11,7 +11,6 @@ export default function Home() {
       siteTitle={SITE_CONFIG.name}
       author={SITE_CONFIG.author.name}
       githubUrl={SITE_CONFIG.author.socialLinks.github}
-      bio={SITE_CONFIG.author.bio}
     />
   );
 }
