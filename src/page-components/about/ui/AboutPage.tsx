@@ -1,6 +1,7 @@
 import { Bio } from "@/entities/user";
 import { Thread, ThreadCard } from "@/entities/thread";
 import { Card, CardContent } from "@/shared/ui/card";
+import { Divider } from "@/shared/ui/divider";
 import { Layout } from "@/widgets/layout";
 
 interface AboutPageProps {
@@ -19,9 +20,11 @@ export function AboutPage({ threads = [], className }: AboutPageProps) {
             </CardContent>
           </Card>
         </section>
-
         {threads.length > 0 && (
           <section>
+            <div className="mb-8">
+              <Divider>Today I Thought</Divider>
+            </div>
             <div className="space-y-4">
               {threads.map((thread) => (
                 <ThreadCard key={thread.id} thread={thread} />
