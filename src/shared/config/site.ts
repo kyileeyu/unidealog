@@ -9,11 +9,10 @@ export const SITE_CONFIG = {
     name: "Seunghyun Yu",
     email: "kyileeeyu@gmail.com",
     bio: {
-      role: "Creator",
       description: ["이 공간의 주인입니다"],
       location: "Seoul, Korea",
     },
-    avatar: "/images/avatar.jpg",
+    avatar: "",
     socialLinks: {
       github: `https://github.com/${
         process.env.NEXT_PUBLIC_GITHUB_USERNAME || "kyileeyu"
