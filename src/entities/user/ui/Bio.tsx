@@ -5,15 +5,31 @@ import { getUserAvatarUrl, getUserBioDescription } from '../lib/utils';
 import { Avatar, AvatarImage, AvatarFallback } from '@/shared/ui/avatar';
 import { Badge } from '@/shared/ui/badge';
 import { Button } from '@/shared/ui/button';
+import { SITE_CONFIG } from '@/shared/config/site';
 import { Github, Linkedin, Mail, Twitter, Globe } from 'lucide-react';
 
 interface BioProps {
-  user: User;
   showSocial?: boolean;
   size?: 'sm' | 'md' | 'lg';
 }
 
-export function Bio({ user, showSocial = true, size = 'md' }: BioProps) {
+export function Bio({ showSocial = true, size = 'md' }: BioProps) {
+  const user: User = {
+    id: SITE_CONFIG.author.id,
+    name: SITE_CONFIG.author.name,
+    email: SITE_CONFIG.author.email,
+    avatar: SITE_CONFIG.author.avatar,
+    bio: {
+      role: SITE_CONFIG.author.bio.role,
+      description: [...SITE_CONFIG.author.bio.description],
+      location: SITE_CONFIG.author.bio.location,
+    },
+    social: {
+      github: SITE_CONFIG.author.socialLinks.github,
+      linkedin: SITE_CONFIG.author.socialLinks.linkedin,
+    },
+  };
+
   const avatarSize = size === 'sm' ? 40 : size === 'md' ? 60 : 80;
   const avatarUrl = getUserAvatarUrl(user, avatarSize);
   const bioDescription = getUserBioDescription(user);

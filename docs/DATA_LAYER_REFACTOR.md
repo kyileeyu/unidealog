@@ -44,12 +44,15 @@ Props Drilling을 제거하고 각 컴포넌트에서 SITE_CONFIG를 직접 impo
   - [x] 내부에서 `SITE_CONFIG.author` 직접 사용
   - [x] Server Component 유지
 
-### Phase 3: Bio 컴포넌트 개선
-- [ ] `Bio` 컴포넌트
-  - [ ] `user` prop 삭제
-  - [ ] 내부에서 `SITE_CONFIG.author` 사용
-  - [ ] User 객체 변환 로직 내부화
-  - [ ] `'use client'` 유지 (이미 클라이언트 컴포넌트)
+### Phase 3: Bio 컴포넌트 개선 ✅
+- [x] `Bio` 컴포넌트
+  - [x] `user` prop 삭제
+  - [x] 내부에서 `SITE_CONFIG.author` 사용
+  - [x] User 객체 변환 로직 내부화
+  - [x] `'use client'` 유지 (이미 클라이언트 컴포넌트)
+- [x] `AboutPage` 컴포넌트
+  - [x] user 객체 생성 로직 제거
+  - [x] Bio 컴포넌트에 user prop 전달 제거
 
 ### Phase 4: Page 컴포넌트 정리 ✅
 - [x] `HomePage`
