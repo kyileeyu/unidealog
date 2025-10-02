@@ -149,15 +149,16 @@ const threads: Thread[] = [
   - [x] `content/threads/001-law-of-attraction.md`
   - [x] `content/threads/002-life-game.md`
 
-### Phase 2: 데이터 정리 및 구조 변경
-- [ ] `src/app/about/page.tsx`에서 불필요한 데이터 제거
-  - [ ] `projects` 배열 제거
-  - [ ] `timeline` 배열 제거
-  - [ ] `skills` 배열은 **유지** (프로필 헤더에 태그로 표시)
-- [ ] `AboutPageProps` 인터페이스 수정
-  - [ ] `projects`, `timeline` props 제거
-  - [ ] `threads` prop 추가
-  - [ ] `skills` prop 유지
+### Phase 2: 데이터 정리 및 구조 변경 ✅
+- [x] `src/app/about/page.tsx`에서 불필요한 데이터 제거
+  - [x] `projects` 배열 제거
+  - [x] `timeline` 배열 제거
+  - [x] `skills` 배열은 **유지** (프로필 헤더에 태그로 표시)
+- [x] `AboutPageProps` 인터페이스 수정
+  - [x] `projects`, `timeline` props 제거
+  - [x] `threads` prop 추가
+  - [x] `skills` prop 유지
+- [x] `page.tsx`를 async 함수로 변경하여 `getThreads()` 호출
 
 ### Phase 3: UI 컴포넌트 리팩토링 (TDD)
 - [ ] **Test**: `AboutPage` 컴포넌트 렌더링 테스트
