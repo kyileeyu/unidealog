@@ -1,6 +1,5 @@
 import { notFound } from 'next/navigation';
-import { getAllPostSlugs, getPostBySlug, getAllPosts } from '@/shared/lib/mdx';
-import { getPostNavigation } from '@/features/post-navigation/lib/navigation';
+import { getAllPosts, getPostBySlug, getPostNavigation } from '@/entities/post';
 import { PostDetailPage } from '@/page-components/post-detail';
 import { SITE_CONFIG } from '@/shared/config/site';
 
@@ -10,20 +9,18 @@ interface PostPageProps {
   }>;
 }
 
-// 정적 경로 생성
 export async function generateStaticParams() {
-  const slugs = getAllPostSlugs();
-  
-  return slugs.map((slug) => ({
-    slug,
+  const posts = await getAllPosts();
+
+  return posts.map((post) => ({
+    slug: post.slug,
   }));
 }
 
-// 메타데이터 생성
 export async function generateMetadata({ params }: PostPageProps) {
   const resolvedParams = await params;
-  const post = getPostBySlug(resolvedParams.slug);
-  
+  const post = await getPostBySlug(resolvedParams.slug);
+
   if (!post) {
     return {
       title: 'Post Not Found',
@@ -53,29 +50,19 @@ export async function generateMetadata({ params }: PostPageProps) {
 
 export default async function PostPage({ params }: PostPageProps) {
   const resolvedParams = await params;
-  const post = getPostBySlug(resolvedParams.slug);
+  const post = await getPostBySlug(resolvedParams.slug);
 
   if (!post) {
     notFound();
   }
 
-  // 네비게이션 계산
-  const allPosts = getAllPosts();
-  const navigation = getPostNavigation(allPosts, resolvedParams.slug);
+  const navigation = await getPostNavigation(resolvedParams.slug);
 
   return (
-    <PostDetailPage 
-      post={post} 
-      previousPost={navigation.prev ? {
-        id: navigation.prev.id,
-        slug: navigation.prev.slug,
-        frontmatter: navigation.prev.frontmatter
-      } : undefined}
-      nextPost={navigation.next ? {
-        id: navigation.next.id,
-        slug: navigation.next.slug,
-        frontmatter: navigation.next.frontmatter
-      } : undefined}
+    <PostDetailPage
+      post={post}
+      previousPost={navigation.previous}
+      nextPost={navigation.next}
     />
   );
 }

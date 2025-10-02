@@ -1,8 +1,8 @@
 import { HomePage } from "@/page-components/home";
-import { getAllPosts } from "@/shared/lib/mdx";
+import { getAllPosts } from "@/entities/post";
 
-export default function Home() {
-  const posts = getAllPosts();
+export default async function Home() {
+  const posts = await getAllPosts();
 
   return <HomePage posts={posts} />;
 }

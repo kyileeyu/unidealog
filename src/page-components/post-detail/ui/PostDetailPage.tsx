@@ -1,4 +1,4 @@
-import { Post } from "@/entities/post";
+import { Post, PostSummary } from "@/entities/post";
 import { Comments } from "@/features/comments";
 import { PostNavigation } from "@/features/post-navigation";
 import { Badge } from "@/shared/ui/badge";
@@ -10,8 +10,8 @@ import { CalendarDays, Clock, User } from "lucide-react";
 
 interface PostDetailPageProps {
   post: Post;
-  previousPost?: Pick<Post, "id" | "slug" | "frontmatter">;
-  nextPost?: Pick<Post, "id" | "slug" | "frontmatter">;
+  previousPost?: PostSummary;
+  nextPost?: PostSummary;
   className?: string;
 }
 
@@ -108,7 +108,18 @@ export function PostDetailPage({
               navigation={{
                 prev: previousPost
                   ? {
-                      ...previousPost,
+                      id: previousPost.id,
+                      slug: previousPost.slug,
+                      frontmatter: {
+                        emoji: previousPost.emoji,
+                        title: previousPost.title,
+                        date: previousPost.date,
+                        author: previousPost.author,
+                        tags: previousPost.tags,
+                        categories: previousPost.categories,
+                        description: previousPost.description,
+                        thumbnail: previousPost.thumbnail,
+                      },
                       content: "",
                       excerpt: "",
                       readingTime: 0,
@@ -117,7 +128,18 @@ export function PostDetailPage({
                   : null,
                 next: nextPost
                   ? {
-                      ...nextPost,
+                      id: nextPost.id,
+                      slug: nextPost.slug,
+                      frontmatter: {
+                        emoji: nextPost.emoji,
+                        title: nextPost.title,
+                        date: nextPost.date,
+                        author: nextPost.author,
+                        tags: nextPost.tags,
+                        categories: nextPost.categories,
+                        description: nextPost.description,
+                        thumbnail: nextPost.thumbnail,
+                      },
                       content: "",
                       excerpt: "",
                       readingTime: 0,

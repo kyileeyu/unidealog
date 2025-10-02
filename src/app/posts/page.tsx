@@ -1,8 +1,6 @@
-import { getAllPosts, getAllCategories } from '@/shared/lib/mdx';
+import { getAllPosts, getAllCategories } from '@/entities/post';
 import { SITE_CONFIG } from '@/shared/config/site';
 import { Metadata } from 'next';
-
-// 전체 포스트 목록 페이지 컴포넌트를 만들어야 합니다
 import { PostsPage } from '@/page-components/posts';
 
 export const metadata: Metadata = {
@@ -15,9 +13,9 @@ export const metadata: Metadata = {
   },
 };
 
-export default function PostsListPage() {
-  const posts = getAllPosts();
-  const categories = getAllCategories();
+export default async function PostsListPage() {
+  const posts = await getAllPosts();
+  const categories = await getAllCategories();
 
   return (
     <PostsPage
