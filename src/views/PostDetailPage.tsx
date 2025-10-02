@@ -4,7 +4,7 @@ import { PostNavigation } from "@/features/post-navigation";
 import { Badge } from "@/shared/ui/badge";
 import { Separator } from "@/shared/ui/separator";
 import { Layout } from "@/widgets/layout";
-import { PostContent } from "@/widgets/post-content";
+import { Content } from "@/widgets/post";
 import { SITE_CONFIG } from "@/shared/config/site";
 import { CalendarDays, Clock, User } from "lucide-react";
 
@@ -97,7 +97,7 @@ export function PostDetailPage({
         </header>
 
         <div className="mb-12">
-          <PostContent content={post.content} />
+          <Content content={post.content} />
         </div>
 
         <Separator className="mb-8" />

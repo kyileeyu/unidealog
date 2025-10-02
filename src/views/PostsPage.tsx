@@ -2,7 +2,7 @@
 
 import { Post } from '@/entities/post';
 import { Layout } from '@/widgets/layout';
-import { PostList } from '@/widgets/post-list';
+import { List } from '@/widgets/post';
 import { Badge } from '@/shared/ui/badge';
 import { useState, useEffect, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
@@ -101,7 +101,7 @@ function PostsContent({
             </div>
           )}
           
-          <PostList 
+          <List 
             posts={filteredPosts}
             variant="grid"
             emptyMessage={

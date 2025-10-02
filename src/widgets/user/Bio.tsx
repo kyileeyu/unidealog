@@ -1,7 +1,6 @@
 "use client";
 
-import { User } from "../model/types";
-import { UserAvatar } from "./UserAvatar";
+import { User, UserAvatar } from "@/entities/user";
 import { Badge } from "@/shared/ui/badge";
 import { SITE_CONFIG } from "@/shared/config/site";
 import { Github, Linkedin, Mail, Twitter, Globe } from "lucide-react";

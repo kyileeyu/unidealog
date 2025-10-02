@@ -2,16 +2,16 @@ import { Suspense } from 'react';
 import { cn } from '@/shared/lib/cn';
 import { processMDX, mdxComponents } from '@/shared/lib/mdx-processor';
 
-interface PostContentProps {
+interface ContentProps {
   content: string;
   className?: string;
 }
 
-function PostContentLoader({ content }: { content: string }) {
-  return <PostContentInner content={content} />;
+function ContentLoader({ content }: { content: string }) {
+  return <ContentInner content={content} />;
 }
 
-async function PostContentInner({ content }: { content: string }) {
+async function ContentInner({ content }: { content: string }) {
   const { content: mdxContent } = await processMDX({
     source: content,
     components: mdxComponents,
@@ -24,11 +24,11 @@ async function PostContentInner({ content }: { content: string }) {
   );
 }
 
-export function PostContent({ content, className }: PostContentProps) {
+export function Content({ content, className }: ContentProps) {
   return (
     <div className={cn("post-content", className)}>
       <Suspense fallback={<div className="animate-pulse">콘텐츠를 불러오는 중...</div>}>
-        <PostContentLoader content={content} />
+        <ContentLoader content={content} />
       </Suspense>
     </div>
   );

@@ -1,6 +1,6 @@
 import { Post } from '@/entities/post';
 import { Layout } from '@/widgets/layout';
-import { PostList } from '@/widgets/post-list';
+import { List } from '@/widgets/post';
 import { PostSearch } from '@/features/post-search';
 import { Badge } from '@/shared/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/shared/ui/card';
@@ -111,7 +111,7 @@ export function CategoryPage({
 
         <div className="mb-8">
           {posts.length > 0 ? (
-            <PostList 
+            <List 
               posts={posts}
               variant="list"
             />

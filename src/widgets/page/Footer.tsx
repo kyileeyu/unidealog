@@ -2,11 +2,11 @@ import Link from 'next/link';
 import { cn } from '@/shared/lib/cn';
 import { SITE_CONFIG } from '@/shared/config/site';
 
-interface PageFooterProps {
+interface FooterProps {
   className?: string;
 }
 
-export function PageFooter({ className }: PageFooterProps) {
+export function Footer({ className }: FooterProps) {
   const currentYear = new Date().getFullYear();
 
   return (

@@ -2,7 +2,7 @@
 
 import { Post } from "@/entities/post";
 import { Layout } from "@/widgets/layout";
-import { PostList } from "@/widgets/post-list";
+import { List } from "@/widgets/post";
 
 interface HomePageProps {
   posts: Post[];
@@ -25,7 +25,7 @@ export function HomePage({
             <p className="text-muted-foreground">최신 포스트를 확인해보세요</p>
           </div>
 
-          <PostList
+          <List
             posts={posts}
             variant="grid"
             emptyMessage="아직 작성된 포스트가 없습니다."

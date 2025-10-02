@@ -11,7 +11,7 @@ interface PostCardProps {
   variant?: 'default' | 'compact';
 }
 
-export function PostCard({ post, className, variant = 'default' }: PostCardProps) {
+export function PostCard({ post, className, variant = "default" }: PostCardProps) {
   const { slug, frontmatter } = post;
   const { title, description, date, categories } = frontmatter;
 

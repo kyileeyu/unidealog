@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
-import { PageHeader } from '@/widgets/page-header';
-import { PageFooter } from '@/widgets/page-footer';
+import { Header } from '@/widgets/page';
+import { Footer } from '@/widgets/page';
 import { Post } from '@/entities/post';
 import { cn } from '@/shared/lib/cn';
 
@@ -22,7 +22,7 @@ export function Layout({
   return (
     <div className={cn("min-h-screen flex flex-col", className)}>
       {showHeader && (
-        <PageHeader posts={posts} />
+        <Header posts={posts} />
       )}
 
       <main className="flex-1">
@@ -30,7 +30,7 @@ export function Layout({
       </main>
 
       {showFooter && (
-        <PageFooter />
+        <Footer />
       )}
     </div>
   );

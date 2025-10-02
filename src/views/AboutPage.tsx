@@ -1,5 +1,6 @@
-import { Bio } from "@/entities/user";
-import { Thread, ThreadCard } from "@/entities/thread";
+import { Thread } from "@/entities/thread";
+import { Bio } from "@/widgets/user";
+import { ThreadCard } from "@/widgets/thread";
 import { Card, CardContent } from "@/shared/ui/card";
 import { Divider } from "@/shared/ui/divider";
 import { Layout } from "@/widgets/layout";

@@ -1,8 +1,8 @@
 import { Post } from '@/entities/post';
-import { PostCard } from '@/widgets/post-card';
+import { PostCard } from '@/widgets/post';
 import { cn } from '@/shared/lib/cn';
 
-interface PostListProps {
+interface ListProps {
   posts: Post[];
   className?: string;
   variant?: 'grid' | 'list';
@@ -10,13 +10,13 @@ interface PostListProps {
   emptyMessage?: string;
 }
 
-export function PostList({ 
+export function List({ 
   posts, 
   className, 
   variant = 'grid',
   cardVariant = 'default',
   emptyMessage = "포스트가 없습니다."
-}: PostListProps) {
+}: ListProps) {
   if (posts.length === 0) {
     return (
       <div className="text-center py-12">

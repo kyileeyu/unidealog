@@ -7,15 +7,15 @@ import { ThemeToggle } from "@/shared/ui/theme-toggle";
 import { SITE_CONFIG } from "@/shared/config/site";
 import Link from "next/link";
 
-interface PageHeaderProps {
+interface HeaderProps {
   posts?: Post[];
   className?: string;
 }
 
-export function PageHeader({
+export function Header({
   posts = [],
   className,
-}: PageHeaderProps) {
+}: HeaderProps) {
   return (
     <header className={cn("page-header-wrapper border-b", className)}>
       <div className="container mx-auto px-4">
