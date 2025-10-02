@@ -12,7 +12,7 @@ export const SITE_CONFIG = {
       description: ["이 공간의 주인입니다"],
       location: "Seoul, Korea",
     },
-    avatar: "",
+    avatar: "https://github.com/kyileeyu.png",
     socialLinks: {
       github: `https://github.com/${
         process.env.NEXT_PUBLIC_GITHUB_USERNAME || "kyileeyu"

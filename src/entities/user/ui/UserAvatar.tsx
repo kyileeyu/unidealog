@@ -2,22 +2,15 @@
 
 import { Avatar, AvatarImage, AvatarFallback } from "@/shared/ui/avatar";
 import { SITE_CONFIG } from "@/shared/config/site";
-import { getUserAvatarUrl } from "../lib/utils";
-import { User } from "../model/types";
 
 interface UserAvatarProps {
-  user?: Partial<User>;
   size?: number;
   className?: string;
 }
 
-export function UserAvatar({ user, size = 100, className }: UserAvatarProps) {
-  const name = user?.name || SITE_CONFIG.author.name;
-  const avatar = user?.avatar || SITE_CONFIG.author.avatar;
-
-  const avatarUrl = user
-    ? getUserAvatarUrl(user as User, size)
-    : `https://github.com/${avatar}.png?size=${size}`;
+export function UserAvatar({ size = 100, className }: UserAvatarProps) {
+  const { name, avatar } = SITE_CONFIG.author;
+  const avatarUrl = size ? `${avatar}?size=${size}` : avatar;
 
   const fallbackInitials = name
     .split(" ")
