@@ -10,16 +10,12 @@ import { useSearchParams, useRouter } from 'next/navigation';
 interface PostsPageProps {
   posts: Post[];
   categories: string[];
-  siteTitle: string;
-  author: string;
   className?: string;
 }
 
 function PostsContent({
   posts,
   categories,
-  siteTitle,
-  author,
   className
 }: PostsPageProps) {
   const searchParams = useSearchParams();
@@ -51,8 +47,6 @@ function PostsContent({
 
   return (
     <Layout
-      siteTitle={siteTitle}
-      author={author}
       posts={posts}
       className={className}
     >

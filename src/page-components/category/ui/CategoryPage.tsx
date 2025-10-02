@@ -10,9 +10,6 @@ interface CategoryPageProps {
   category: string;
   posts: Post[];
   allPosts?: Post[];
-  siteTitle: string;
-  author: string;
-  githubUrl?: string;
   className?: string;
 }
 
@@ -20,9 +17,6 @@ export function CategoryPage({
   category,
   posts,
   allPosts = [],
-  siteTitle,
-  author,
-  githubUrl,
   className
 }: CategoryPageProps) {
   // 카테고리 통계
@@ -36,9 +30,6 @@ export function CategoryPage({
 
   return (
     <Layout
-      siteTitle={siteTitle}
-      author={author}
-      githubUrl={githubUrl}
       posts={allPosts}
       className={className}
     >

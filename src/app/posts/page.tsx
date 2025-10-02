@@ -20,11 +20,9 @@ export default function PostsListPage() {
   const categories = getAllCategories();
 
   return (
-    <PostsPage 
+    <PostsPage
       posts={posts}
       categories={categories}
-      siteTitle={SITE_CONFIG.name}
-      author={SITE_CONFIG.author.name}
     />
   );
 }

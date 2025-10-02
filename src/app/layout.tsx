@@ -40,7 +40,7 @@ export default function RootLayout({
         >
           {children}
         </ThemeProvider>
-        
+
         <JsonLd data={websiteJsonLd} />
         <Analytics googleAnalyticsId={process.env.GOOGLE_ANALYTICS_ID} />
       </body>

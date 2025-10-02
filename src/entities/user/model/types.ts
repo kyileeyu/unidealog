@@ -8,7 +8,6 @@ export interface User {
 }
 
 export interface UserBio {
-  role: string;
   description: string[];
   thumbnail?: string;
   location?: string;
