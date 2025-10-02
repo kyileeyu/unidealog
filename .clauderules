@@ -44,8 +44,45 @@
 
 ### 파일 구조 규칙
 - `views/`: flat 구조 (HomePage.tsx, AboutPage.tsx 등)
-- `widgets/`, `features/`, `entities/`: 폴더별 index.ts로 export
+- `widgets/`: 도메인별 폴더 구조 (page/, post/, user/, thread/)
+- `features/`, `entities/`: 폴더별 index.ts로 export
 - `entities/`: api, model, lib, ui 서브폴더 구조
+
+### FSD 구조 설계 결정사항
+
+#### 언제 폴더를 나누는가?
+
+**views/ - Flat 구조**
+- 페이지는 많지 않음 (6-10개 정도)
+- 단순 조합 레이어이므로 복잡도 낮음
+- 파일명만으로 충분히 구분 가능
+- 결정: **flat 구조 유지**
+
+**widgets/ - 폴더 구조**
+- 위젯은 계속 증가 가능 (20개 이상 예상)
+- 도메인별 그룹화 필요 (page/, post/, user/, thread/)
+- 나중에 각 위젯에 lib/, model/ 추가 가능
+- 결정: **도메인별 폴더 구조**
+
+#### entities/ui vs widgets 구분
+
+**entities/[entity]/ui - 최소 단위 표현**
+- 도메인 지식이 포함된 가장 작은 UI 표현
+- 예: UserAvatar (GitHub URL 생성, fallback 로직)
+- 다른 컴포넌트를 조합하지 않음
+- 재사용 가능한 최소 단위
+
+**widgets/[domain] - 조합과 레이아웃**
+- 여러 컴포넌트를 조합
+- 복잡한 레이아웃과 로직
+- 예: Bio (UserAvatar + Badge + Button 조합)
+- 예: ThreadCard (UserAvatar + Card + formatTimeAgo)
+
+**판단 기준:**
+- 조합인가? → widget
+- 최소 표현인가? → entity/ui
+- 복잡한 레이아웃인가? → widget
+- 도메인 로직만 있는가? → entity/ui
 
 ## 커밋 전 검증
 
@@ -53,3 +90,16 @@
 - 커밋하기 전에 반드시 `npm run dev`로 개발 서버가 정상 작동하는지 확인합니다
 - 빌드 에러, 타입 에러, import 에러 등이 없는지 확인합니다
 - 에러가 있다면 수정 후 커밋합니다
+
+### 커밋 메시지 작성 프로세스
+1. **전체 변경사항 파악**
+   - `git status` - 변경된 파일 목록 확인
+   - `git diff --stat` - 변경 규모 파악
+   - `git diff` (주요 파일) - 실제 변경 내용 확인
+2. **맥락 이해**
+   - 마지막 수정 사항만 보지 말고 전체 변경의 목적과 맥락 이해
+   - 여러 파일의 변경사항이 어떻게 연결되는지 파악
+3. **커밋 메시지 작성**
+   - 전체 변경사항을 포괄하는 명확한 제목
+   - 주요 변경사항을 구체적으로 나열
+   - 변경 이유와 효과 설명
