@@ -1,6 +1,18 @@
-# 📝 Unidealog - Modern Blog with MDX & TDD
+# 📝 Unidealog
 
-> 기존 Gatsby 블로그(bloggg)의 구조와 기능을 참고하여 Next.js 15+ App Router와 shadcn/ui로 구현하는 현대적인 블로그입니다.
+> 코드는 AI가 짜줬지만 글은 사람이 씁니다.
+
+> 클로드 코드를 이용해 개발한 개인 개발 블로그
+
+## 🤖 AI-Powered Development
+
+이 프로젝트는 **Claude Code**를 활용하여 다음과 같은 방식으로 개발되었습니다:
+
+- **📋 TDD 기반 개발**: 테스트 코드 우선 작성 후 구현 (Claude Code 지원)
+- **🏗️ FSD 아키텍처**: Feature-Sliced Design 체계적 적용
+- **📐 체계적인 문서화**: Phase별 개발 계획 및 실행 기록 ([docs](./docs) 참고)
+- **♻️ 지속적인 리팩토링**: Props Drilling 제거, 데이터 레이어 개선
+- **🔍 코드 품질 관리**: `.clauderules`를 통한 일관된 코드 스타일 유지
 
 ## ✨ 주요 기능
 
@@ -9,147 +21,140 @@
 - 🔍 **포스트 검색** - 실시간 검색 및 카테고리 필터링
 - 💬 **댓글 시스템** - Giscus (GitHub Discussions 기반)
 - 📱 **반응형 디자인** - 모바일/태블릿/데스크톱 최적화
-- ⚡ **고성능** - Next.js 15+ App Router, 이미지 최적화
+- ⚡ **고성능** - Next.js 15+ App Router, Server Components
 - ♿ **접근성** - WCAG 2.1 준수
 - 🎯 **SEO 최적화** - 메타데이터, Open Graph, JSON-LD
 
 ## 🛠️ 기술 스택
 
+### Core
+
 - **Frontend**: Next.js 15+, TypeScript, React 19
 - **Styling**: Tailwind CSS 4, shadcn/ui
 - **Content**: MDX, gray-matter, next-mdx-remote
-- **Code Highlighting**: highlight.js
-- **Testing**: Jest, React Testing Library
-- **Deployment**: Vercel
+- **Testing**: Jest, React Testing Library (TDD)
+
+### Development Tools
+
+- **AI Assistant**: Claude Code (설계, 구현, 리팩토링)
+- **Code Quality**: ESLint, Prettier, `.clauderules`
+- **Version Control**: Git (체계적인 커밋 메시지)
 
 ## 🏗️ 프로젝트 구조 (FSD)
 
-Feature-Sliced Design 아키텍처를 기반으로 구성되어 있습니다:
+**Feature-Sliced Design** 아키텍처로 확장 가능하고 유지보수가 쉬운 구조:
 
 ```
 src/
 ├── app/              # Next.js App Router
-├── shared/           # 공유 자원 (UI, utils, types)
-├── entities/         # 비즈니스 엔티티 (post, user, category, thread)
-├── features/         # 기능 단위 (search, theme, navigation, comments)
-├── widgets/          # 복합 UI (header, footer, post-card, layout)
-└── page-components/  # 페이지 컴포넌트
+├── shared/           # 공유 자원 (UI, utils, config)
+├── entities/         # 비즈니스 엔티티 (post, user, thread)
+├── features/         # 기능 단위 (search, theme, navigation)
+├── widgets/          # 복합 UI 블록 (header, footer, layout)
+└── page-components/  # 페이지 조합 컴포넌트
 
 content/
 ├── posts/            # 블로그 포스트 (.mdx)
 └── threads/          # 짧은 생각 (.md)
+
+docs/                 # 개발 문서 (계획, 회고, 가이드)
 ```
 
-### FSD 레이어 설명
+### 아키텍처 원칙
 
-- **shared**: 재사용 가능한 공통 컴포넌트, 유틸리티
-- **entities**: 비즈니스 엔티티 (Post, Category, User, Thread)
-- **features**: 사용자 상호작용이 있는 기능들
-- **widgets**: 여러 entities와 features를 조합한 복합 UI
-- **page-components**: 라우팅되는 페이지들
+- **계층 분리**: 상위 레이어는 하위 레이어만 참조
+- **단일 책임**: 각 모듈은 하나의 역할만 수행
+- **재사용성**: shared 레이어의 컴포넌트/유틸 활용
+- **타입 안정성**: TypeScript strict 모드
 
-## 🚀 시작하기
-
-### 설치
+## 🚀 빠른 시작
 
 ```bash
+# 의존성 설치
 npm install
-```
 
-### 개발 서버 실행
-
-```bash
+# 개발 서버 실행
 npm run dev
-```
 
-브라우저에서 [http://localhost:3000](http://localhost:3000)을 열어 확인하세요.
-
-### 테스트 실행
-
-```bash
-# 유닛 테스트
-npm run test
-
-# 테스트 watch 모드
+# 테스트 실행 (TDD)
 npm run test:watch
 
-# 커버리지 확인
-npm run test:coverage
-```
-
-### 빌드
-
-```bash
+# 프로덕션 빌드
 npm run build
 npm run start
 ```
 
-## 📝 콘텐츠 작성
+## 📚 개발 문서
 
-### 블로그 포스트 작성
+| 순서 | 문서                                                                     | 주요 내용                              |
+| ---- | ------------------------------------------------------------------------ | -------------------------------------- |
+| 001  | [초기 설정 및 개발 계획서](./docs/001-INITIAL_SETUP.md)                  | Phase 0-6 개발 로드맵, MDX 시스템 구축 |
+| 002  | [데이터 레이어 리팩토링](./docs/002-DATA_LAYER_REFACTOR.md)              | Props Drilling 제거, 아키텍처 개선     |
+| 003  | [스레드 스타일 About 페이지](./docs/003-THREAD_STYLE_ABOUT_PAGE_PLAN.md) | TDD 기반 Thread 엔티티 구현            |
 
-`content/posts/` 폴더에 `.mdx` 파일을 생성:
+> 💡 각 문서는 **계획 → 구현 → 검증** 프로세스를 상세히 기록
 
-```markdown
----
-emoji: "🎯"
-title: "새로운 포스트 제목"
-date: "2024-01-16"
-author: "Your Name"
-tags: ["nextjs", "blog"]
-categories: ["development"]
-description: "포스트 설명"
----
+## 🧪 개발 방법론
 
-# 포스트 내용
+### TDD (Test-Driven Development)
 
-여기에 마크다운으로 글을 작성하세요!
+```bash
+# 1. 테스트 작성
+tests/unit/shared/lib/utils.test.ts
+
+# 2. 구현
+src/shared/lib/utils.ts
+
+# 3. 검증
+npm run test
 ```
 
-### 스레드 작성
+### 코드 품질 관리
 
-`content/threads/` 폴더에 `.md` 파일을 생성:
+- **`.clauderules`**: 프로젝트별 코딩 규칙 정의
+- **일관된 커밋**: `feat:`, `fix:`, `refactor:` 등 컨벤션 준수
+- **문서화**: 모든 주요 결정사항을 docs에 기록
 
-```markdown
----
-id: "1"
-title: "짧은 생각"
-timestamp: "2025-10-03T10:00:00Z"
----
+## 💡 주요 개발 성과
 
-오늘의 생각을 여기에 작성하세요.
-```
+### 1. 체계적인 아키텍처 설계
+
+- FSD 패턴 적용으로 확장 가능한 구조 구축
+- Server/Client Component 최적 분리
+
+### 2. 성능 최적화
+
+- Props Drilling 제거 → Server Component 최대 활용
+- 정적 데이터는 직접 import, 동적 데이터만 props 전달
+
+### 3. 개발 생산성
+
+- Claude Code 활용으로 빠른 프로토타이핑
+- TDD로 안정적인 코드베이스 확보
+- 체계적 문서화로 컨텍스트 스위칭 최소화
 
 ## 🎨 디자인 시스템
 
-- **컬러**: Slate 기반 (shadcn/ui 기본)
-- **타이포그래피**: Pretendard (한글 최적화)
-- **컴포넌트**: shadcn/ui + 커스텀 컴포넌트
-- **반응형**: Tailwind CSS 브레이크포인트
+- **컬러**: Slate 기반 (다크모드 최적화), 눈에 편안한 색감 고려
+- **타이포그래피**: Pretendard (한글 가독성)
+- **컴포넌트**: shadcn/ui + 커스텀 확장
+- **반응형**: Mobile-first 접근
 
-## 📚 문서
+## 📝 콘텐츠 관리
 
-| 순서 | 문서 | 설명 |
-|------|------|------|
-| 001 | [초기 설정 및 개발 계획서](./docs/001-INITIAL_SETUP.md) | 프로젝트 전체 개발 로드맵 |
-| 002 | [데이터 레이어 리팩토링](./docs/002-DATA_LAYER_REFACTOR.md) | 데이터 관리 구조 개선 |
-| 003 | [스레드 스타일 About 페이지](./docs/003-THREAD_STYLE_ABOUT_PAGE_PLAN.md) | About 페이지 스레드 기능 |
+### VS Code 스니펫 활용
 
-## 🤝 기여하기
+`.vscode/mdx.code-snippets`에 정의된 템플릿으로 빠른 콘텐츠 작성:
 
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+- `temp` → 블로그 포스트 템플릿
+- `thread` → 스레드 템플릿
+- `dev` → 개발 포스트 템플릿
 
-## 📄 라이센스
+---
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+<div align="center">
 
-## 🔗 참고 자료
+**🤖 Built with Claude Code**
+AI-Powered Development
 
-- [Next.js Documentation](https://nextjs.org/docs)
-- [shadcn/ui Documentation](https://ui.shadcn.com)
-- [Tailwind CSS Documentation](https://tailwindcss.com/docs)
-- [MDX Documentation](https://mdxjs.com)
+</div>
