@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { cn } from '@/shared/lib/utils';
+import { cn } from '@/shared/lib/cn';
 import { SITE_CONFIG } from '@/shared/config/site';
 
 interface PageFooterProps {

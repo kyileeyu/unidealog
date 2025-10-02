@@ -2,7 +2,7 @@ import { ReactNode } from 'react';
 import { PageHeader } from '@/widgets/page-header';
 import { PageFooter } from '@/widgets/page-footer';
 import { Post } from '@/entities/post';
-import { cn } from '@/shared/lib/utils';
+import { cn } from '@/shared/lib/cn';
 
 interface LayoutProps {
   children: ReactNode;

@@ -3,7 +3,7 @@ import { Card, CardContent } from '@/shared/ui/card';
 import { Badge } from '@/shared/ui/badge';
 import { Post } from '@/entities/post';
 import { formatDate } from '@/shared/lib/utils';
-import { cn } from '@/shared/lib/utils';
+import { cn } from '@/shared/lib/cn';
 
 interface PostCardProps {
   post: Post;

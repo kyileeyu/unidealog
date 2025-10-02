@@ -2,7 +2,7 @@
 
 import { Post } from "@/entities/post";
 import { PostSearch } from "@/features/post-search/ui/PostSearch";
-import { cn } from "@/shared/lib/utils";
+import { cn } from "@/shared/lib/cn";
 import { ThemeToggle } from "@/shared/ui/theme-toggle";
 import { SITE_CONFIG } from "@/shared/config/site";
 import Link from "next/link";

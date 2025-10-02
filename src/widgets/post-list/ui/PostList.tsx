@@ -1,6 +1,6 @@
 import { Post } from '@/entities/post';
 import { PostCard } from '@/widgets/post-card';
-import { cn } from '@/shared/lib/utils';
+import { cn } from '@/shared/lib/cn';
 
 interface PostListProps {
   posts: Post[];

@@ -1,5 +1,5 @@
 import { Suspense } from 'react';
-import { cn } from '@/shared/lib/utils';
+import { cn } from '@/shared/lib/cn';
 import { processMDX, mdxComponents } from '@/shared/lib/mdx-processor';
 
 interface PostContentProps {
