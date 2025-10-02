@@ -29,10 +29,23 @@
 
 ## 아키텍처
 
-### FSD (Feature-Sliced Design)
-- 계층 구조: shared → entities → features → widgets → pages
+### FSD (Feature-Sliced Design) + Next.js App Router
+- 계층 구조: app → views → widgets → features → entities → shared
 - 상위 레이어는 하위 레이어만 참조 가능합니다
 - entities 레이어를 통한 데이터 접근을 우선시합니다
+
+### 레이어별 역할
+- **app/**: Next.js App Router (라우팅만 담당, 최소 코드)
+- **views/**: 페이지 조합 레이어 (widgets/features/entities 조합)
+- **widgets/**: 재사용 가능한 큰 UI 블록 (layout, header, footer 등)
+- **features/**: 비즈니스 기능 단위 (search, theme, comments 등)
+- **entities/**: 도메인 엔티티 (post, user, thread - api/model/lib/ui)
+- **shared/**: 공통 자원 (ui, lib, config)
+
+### 파일 구조 규칙
+- `views/`: flat 구조 (HomePage.tsx, AboutPage.tsx 등)
+- `widgets/`, `features/`, `entities/`: 폴더별 index.ts로 export
+- `entities/`: api, model, lib, ui 서브폴더 구조
 
 ## 커밋 전 검증
 
