@@ -34,9 +34,7 @@ export function PostDetailPage({
   return (
     <Layout className={className}>
       <article className="container mx-auto px-4 py-8 max-w-4xl">
-        {/* Post Header */}
         <header className="mb-8">
-          {/* Categories */}
           {frontmatter.categories && frontmatter.categories.length > 0 && (
             <div className="mb-4">
               {frontmatter.categories.map((category, index) => (
@@ -51,7 +49,6 @@ export function PostDetailPage({
             </div>
           )}
 
-          {/* Title with Emoji */}
           <h1 className="text-4xl font-bold mb-4 leading-tight">
             {frontmatter.emoji && (
               <span className="mr-3">{frontmatter.emoji}</span>
@@ -59,14 +56,12 @@ export function PostDetailPage({
             {frontmatter.title}
           </h1>
 
-          {/* Description/Excerpt */}
           {(frontmatter.description || post.excerpt) && (
             <p className="text-xl text-muted-foreground mb-6 leading-relaxed">
               {frontmatter.description || post.excerpt}
             </p>
           )}
 
-          {/* Meta Information */}
           <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground mb-6">
             <div className="flex items-center gap-1">
               <User className="h-4 w-4" />
@@ -88,7 +83,6 @@ export function PostDetailPage({
             )}
           </div>
 
-          {/* Tags */}
           {frontmatter.tags && frontmatter.tags.length > 0 && (
             <div className="flex flex-wrap gap-2 mb-6">
               {frontmatter.tags.map((tag, index) => (
@@ -102,14 +96,12 @@ export function PostDetailPage({
           <Separator className="mb-8" />
         </header>
 
-        {/* Post Content */}
         <div className="mb-12">
           <PostContent content={post.content} />
         </div>
 
         <Separator className="mb-8" />
 
-        {/* Post Navigation */}
         {(previousPost || nextPost) && (
           <div className="mb-12">
             <PostNavigation
@@ -137,7 +129,6 @@ export function PostDetailPage({
           </div>
         )}
 
-        {/* Comments */}
         <div className="mb-8">
           <Comments />
         </div>

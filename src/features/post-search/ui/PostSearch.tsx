@@ -108,7 +108,6 @@ export function PostSearch({
 
   return (
     <div ref={searchRef} className={`relative w-full max-w-2xl ${className}`}>
-      {/* 검색 입력 */}
       <div className="relative">
         <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
         <Input
@@ -135,25 +134,21 @@ export function PostSearch({
         )}
       </div>
 
-      {/* 검색 결과 또는 히스토리 */}
       {isOpen && showResults && (
         <Card className="absolute top-full left-0 right-0 mt-2 z-50 max-h-96 overflow-y-auto">
           <CardContent className="p-0">
-            {/* 로딩 상태 */}
             {isSearching && (
               <div className="p-4 text-center text-muted-foreground">
                 검색 중...
               </div>
             )}
 
-            {/* 에러 상태 */}
             {error && (
               <div className="p-4 text-center text-destructive">
                 {error}
               </div>
             )}
 
-            {/* 검색 히스토리 */}
             {showHistory && history.length > 0 && (
               <div className="border-b">
                 <div className="flex items-center justify-between p-3 border-b bg-muted/50">
@@ -190,15 +185,12 @@ export function PostSearch({
               </div>
             )}
 
-            {/* 검색 결과 */}
             {results && !showHistory && (
               <>
-                {/* 검색 정보 */}
                 <div className="p-3 border-b bg-muted/50 text-sm text-muted-foreground">
                   {results.totalResults}개 결과 ({results.searchTime.toFixed(2)}ms)
                 </div>
 
-                {/* 검색 결과 목록 */}
                 {displayResults.length > 0 ? (
                   <div className="divide-y">
                     {displayResults.map((post) => (

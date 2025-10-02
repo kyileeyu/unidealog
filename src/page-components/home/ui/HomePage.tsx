@@ -19,17 +19,6 @@ export function HomePage({
       className={className}
     >
       <div className="container mx-auto px-4 py-8">
-        {/* Bio Section */}
-        {/* {bio && (
-          <section className="mb-12">
-            <Bio 
-              user={user}
-              size="lg"
-            />
-          </section>
-        )} */}
-
-        {/* Posts Section */}
         <section>
           <div className="mb-8">
             <h2 className="text-2xl font-bold mb-2">Recent Posts</h2>

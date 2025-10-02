@@ -51,7 +51,6 @@ function PostsContent({
       className={className}
     >
       <div className="container mx-auto px-4 py-8">
-        {/* 페이지 헤더 */}
         <section className="mb-12">
           <h1 className="text-4xl font-bold mb-4">All Posts</h1>
           <p className="text-muted-foreground text-lg">
@@ -59,7 +58,6 @@ function PostsContent({
           </p>
         </section>
 
-        {/* 카테고리 필터 */}
         {categories.length > 0 && (
           <section className="mb-8">
             <h2 className="text-xl font-semibold mb-4">카테고리별 필터</h2>
@@ -72,10 +70,10 @@ function PostsContent({
                 전체 ({posts.length})
               </Badge>
               {categories.map((category) => {
-                const count = posts.filter(post => 
+                const count = posts.filter(post =>
                   post.frontmatter.categories.includes(category)
                 ).length;
-                
+
                 return (
                   <Badge
                     key={category}
@@ -91,7 +89,6 @@ function PostsContent({
           </section>
         )}
 
-        {/* 포스트 목록 */}
         <section>
           {selectedCategory && (
             <div className="mb-6">

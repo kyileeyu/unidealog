@@ -34,7 +34,6 @@ export function CategoryPage({
       className={className}
     >
       <div className="container mx-auto px-4 py-8">
-        {/* Category Header */}
         <div className="mb-8">
           <div className="flex items-center gap-3 mb-4">
             <Badge variant="default" className="text-lg px-4 py-2 capitalize">
@@ -52,7 +51,6 @@ export function CategoryPage({
           </p>
         </div>
 
-        {/* Category Stats */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
@@ -104,7 +102,6 @@ export function CategoryPage({
           </Card>
         </div>
 
-        {/* Search */}
         <div className="mb-8">
           <PostSearch 
             posts={posts}
@@ -112,7 +109,6 @@ export function CategoryPage({
           />
         </div>
 
-        {/* Posts List */}
         <div className="mb-8">
           {posts.length > 0 ? (
             <PostList 
@@ -135,7 +131,6 @@ export function CategoryPage({
           )}
         </div>
 
-        {/* Related Tags */}
         {posts.length > 0 && (
           <div className="mb-8">
             <h2 className="text-2xl font-bold mb-4">관련 태그</h2>

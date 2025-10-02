@@ -23,7 +23,6 @@ export function PostCard({ post, className, variant = 'default' }: PostCardProps
       <CardContent className="p-0">
         <Link href={`/posts/${slug}`} className="block p-6">
           <div className="space-y-3">
-            {/* Title */}
             <h3 className={cn(
               "font-semibold leading-tight hover:text-primary transition-colors",
               variant === 'compact' ? "text-lg" : "text-xl"
@@ -31,7 +30,6 @@ export function PostCard({ post, className, variant = 'default' }: PostCardProps
               {title}
             </h3>
 
-            {/* Description */}
             {description && (
               <p className={cn(
                 "text-muted-foreground line-clamp-3",
@@ -41,9 +39,7 @@ export function PostCard({ post, className, variant = 'default' }: PostCardProps
               </p>
             )}
 
-            {/* Meta Info */}
             <div className="flex items-center justify-between pt-2">
-              {/* Date */}
               <time className={cn(
                 "text-muted-foreground",
                 variant === 'compact' ? "text-xs" : "text-sm"
@@ -51,7 +47,6 @@ export function PostCard({ post, className, variant = 'default' }: PostCardProps
                 {formatDate(date)}
               </time>
 
-              {/* Categories */}
               {categories.length > 0 && (
                 <div className="flex gap-1 flex-wrap">
                   {categories.slice(0, 3).map((category) => (
