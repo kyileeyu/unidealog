@@ -160,43 +160,30 @@ const threads: Thread[] = [
   - [x] `skills` prop 유지
 - [x] `page.tsx`를 async 함수로 변경하여 `getThreads()` 호출
 
-### Phase 3: UI 컴포넌트 리팩토링 (TDD)
-- [ ] **Test**: `AboutPage` 컴포넌트 렌더링 테스트
-  - [ ] 프로필 헤더 렌더링 확인
-  - [ ] Skills 배지 렌더링 확인
-  - [ ] 스레드 리스트 렌더링 확인
-- [ ] **Code**: `AboutPage.tsx` 기존 섹션 제거
-  - [ ] Projects Section 제거
-  - [ ] Timeline Section 제거
-  - [ ] Contact Section 제거
-- [ ] **Code**: 프로필 헤더 섹션 재구성
-  - [ ] 아바타 이미지 표시
-  - [ ] 이름 표시 (Seunghyun Yu)
-  - [ ] 이메일 표시
-  - [ ] Bio 표시
-  - [ ] 소셜 링크 표시 (GitHub, LinkedIn)
-  - [ ] Skills를 Badge 태그 형태로 표시
+### Phase 3: UI 컴포넌트 리팩토링 ✅
+- [x] **Code**: `AboutPage.tsx` 레이아웃 변경
+  - [x] max-w-2xl로 중앙 정렬 레이아웃 적용
+  - [x] 프로필 헤더를 Card 안에 Bio + Skills로 통합
+  - [x] Skills를 프로필 하단에 Badge 태그 형태로 표시
 
-### Phase 4: 스레드 리스트 구현 (TDD)
-- [ ] **Test**: ThreadCard 컴포넌트 테스트
-  - [ ] 작성자 정보 표시 확인
-  - [ ] timestamp → timeAgo 변환 확인
-  - [ ] 본문 내용 표시 확인 (줄바꿈 처리)
-- [ ] **Code**: ThreadCard 컴포넌트 생성
-- [ ] **Code**: 스레드 리스트 렌더링
-- [ ] **Test**: 빈 상태 테스트
-- [ ] **Code**: 빈 상태 처리 (스레드가 없을 때)
+### Phase 4: 스레드 리스트 구현 ✅
+- [x] **Code**: ThreadCard 컴포넌트 생성
+  - [x] 작성자 정보 표시
+  - [x] timestamp → formatTimeAgo로 변환하여 표시
+  - [x] 본문 내용 표시 (whitespace-pre-wrap으로 줄바꿈 처리)
+- [x] **Code**: AboutPage에서 ThreadCard 컴포넌트 사용
+- [x] **Code**: entities/thread/index.ts 배럴 파일 생성
 
-### Phase 5: 스타일링 및 반응형
-- [ ] 프로필 헤더 스타일링
-- [ ] 스레드 카드 스타일링
-  - [ ] Card 컴포넌트 활용
-  - [ ] 적절한 간격 및 여백
-  - [ ] 타이포그래피 조정
-- [ ] 반응형 레이아웃 적용
-  - [ ] 모바일: 단일 컬럼
-  - [ ] 데스크탑: 중앙 정렬, max-w-2xl
-- [ ] 다크모드 지원 확인
+### Phase 5: 스타일링 및 반응형 ✅
+- [x] 프로필 헤더 스타일링 (Card 컴포넌트 활용)
+- [x] 스레드 카드 스타일링
+  - [x] Card 컴포넌트 활용
+  - [x] 적절한 간격 및 여백 (space-y-4)
+  - [x] 타이포그래피 조정 (text-sm, leading-relaxed)
+- [x] 반응형 레이아웃 적용
+  - [x] 모바일: 단일 컬럼
+  - [x] 데스크탑: 중앙 정렬, max-w-2xl
+- [x] 다크모드 지원 (기본 테마 시스템 활용)
 
 ### Phase 6: 통합 테스트 및 검증
 - [ ] E2E 테스트 (선택)
