@@ -1,7 +1,7 @@
 "use client";
 
 import { User } from "../model/types";
-import { getUserAvatarUrl, getUserBioDescription } from "../lib/utils";
+import { getUserAvatarUrl } from "../lib/utils";
 import { Avatar, AvatarImage, AvatarFallback } from "@/shared/ui/avatar";
 import { Badge } from "@/shared/ui/badge";
 import { SITE_CONFIG } from "@/shared/config/site";
@@ -29,8 +29,7 @@ export function Bio({ showSocial = true, size = "md" }: BioProps) {
     },
   };
 
-  const avatarSize = size === "sm" ? 40 : size === "md" ? 60 : 80;
-  const avatarUrl = getUserAvatarUrl(user, avatarSize);
+  const avatarUrl = getUserAvatarUrl(user, 400);
 
   const socialLinks = [
     {
@@ -78,7 +77,7 @@ export function Bio({ showSocial = true, size = "md" }: BioProps) {
             </p>
           ))}
         </div>
-        <Avatar className="h-32 w-32">
+        <Avatar className="h-28 w-28">
           <AvatarImage src={avatarUrl} alt={user.name} />
           <AvatarFallback>
             {user.name

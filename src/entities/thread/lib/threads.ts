@@ -4,7 +4,7 @@ import matter from "gray-matter";
 
 export interface Thread {
   id: string;
-  author: string;
+  title: string;
   content: string;
   timestamp: string;
 }
@@ -24,7 +24,7 @@ export async function getThreads(): Promise<Thread[]> {
 
       return {
         id: data.id,
-        author: data.author,
+        title: data.title,
         content: content.trim(),
         timestamp: data.timestamp,
       };

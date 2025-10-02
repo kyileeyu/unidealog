@@ -1,6 +1,6 @@
 ---
 id: "1"
-author: "nullandflow"
+title: "끌어당김의 법칙을 넘어서"
 timestamp: "2025-10-02T10:00:00Z"
 ---
 

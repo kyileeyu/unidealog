@@ -15,12 +15,12 @@ describe("threads", () => {
       const thread = threads[0];
 
       expect(thread).toHaveProperty("id");
-      expect(thread).toHaveProperty("author");
+      expect(thread).toHaveProperty("title");
       expect(thread).toHaveProperty("content");
       expect(thread).toHaveProperty("timestamp");
 
       expect(typeof thread.id).toBe("string");
-      expect(typeof thread.author).toBe("string");
+      expect(typeof thread.title).toBe("string");
       expect(typeof thread.content).toBe("string");
       expect(typeof thread.timestamp).toBe("string");
     });
@@ -40,7 +40,7 @@ describe("threads", () => {
       const thread = threads.find((t) => t.id === "1");
 
       expect(thread).toBeDefined();
-      expect(thread?.author).toBe("nullandflow");
+      expect(thread?.title).toBe("끌어당김의 법칙을 넘어서");
       expect(thread?.content).toContain("끌어당김을 배웠다");
       expect(thread?.timestamp).toBe("2025-10-02T10:00:00Z");
     });
@@ -51,7 +51,7 @@ describe("threads", () => {
 
       expect(thread.content).not.toContain("---");
       expect(thread.content).not.toContain("id:");
-      expect(thread.content).not.toContain("author:");
+      expect(thread.content).not.toContain("title:");
       expect(thread.content).not.toContain("timestamp:");
     });
   });

@@ -1,6 +1,6 @@
 ---
 id: "2"
-author: "nullandflow"
+title: "삶이라는 게임"
 timestamp: "2025-09-30T15:30:00Z"
 ---
 
