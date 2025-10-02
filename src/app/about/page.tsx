@@ -1,4 +1,4 @@
-import { AboutPage } from "@/page-components/about";
+import { AboutPage } from "@/views";
 import { getThreads } from "@/entities/thread/lib/threads";
 
 export default async function About() {

@@ -1,7 +1,7 @@
 import { getAllPosts, getAllCategories } from '@/entities/post';
 import { SITE_CONFIG } from '@/shared/config/site';
 import { Metadata } from 'next';
-import { PostsPage } from '@/page-components/posts';
+import { PostsPage } from '@/views';
 
 export const metadata: Metadata = {
   title: `All Posts | ${SITE_CONFIG.name}`,

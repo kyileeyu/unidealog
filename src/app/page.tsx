@@ -1,4 +1,4 @@
-import { HomePage } from "@/page-components/home";
+import { HomePage } from "@/views";
 import { getAllPosts } from "@/entities/post";
 
 export default async function Home() {

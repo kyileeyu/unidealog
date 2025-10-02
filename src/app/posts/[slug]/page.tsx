@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
 import { getAllPosts, getPostBySlug, getPostNavigation } from '@/entities/post';
-import { PostDetailPage } from '@/page-components/post-detail';
+import { PostDetailPage } from '@/views';
 import { SITE_CONFIG } from '@/shared/config/site';
 
 interface PostPageProps {
