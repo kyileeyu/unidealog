@@ -1,29 +1,6 @@
 import { User } from '../model/types';
 
 /**
- * Get user avatar URL
- */
-export function getUserAvatarUrl(user: User, size: number = 40): string {
-  if (user.avatar) {
-    // If it's a full URL, return as is
-    if (user.avatar.startsWith('http')) {
-      return user.avatar;
-    }
-    // If it's a relative path, construct the full path
-    return `/assets/avatars/${user.avatar}`;
-  }
-
-  // Fallback to GitHub avatar if GitHub URL is available
-  if (user.social?.github) {
-    const username = user.social.github.split('/').pop();
-    return `https://github.com/${username}.png?size=${size}`;
-  }
-
-  // Fallback to Gravatar or default avatar
-  return `https://ui-avatars.com/api/?name=${encodeURIComponent(user.name)}&size=${size}&background=6366f1&color=ffffff`;
-}
-
-/**
  * Get user display name
  */
 export function getUserDisplayName(user: User): string {

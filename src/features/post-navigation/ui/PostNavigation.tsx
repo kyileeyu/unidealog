@@ -21,7 +21,6 @@ export function PostNavigation({ navigation, className }: PostNavigationProps) {
 
   return (
     <div className={`grid grid-cols-1 md:grid-cols-2 gap-4 ${className}`}>
-      {/* 이전 포스트 */}
       <div className="flex justify-start">
         {prev ? (
           <PostNavigationCard
@@ -34,7 +33,6 @@ export function PostNavigation({ navigation, className }: PostNavigationProps) {
         )}
       </div>
 
-      {/* 다음 포스트 */}
       <div className="flex justify-end">
         {next ? (
           <PostNavigationCard

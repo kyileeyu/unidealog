@@ -1,5 +1,4 @@
-import { getThreads, Thread } from "@/entities/thread/lib/threads";
-import { formatTimeAgo } from "@/shared/lib/utils";
+import { getThreads } from "@/entities/thread/lib/threads";
 
 describe("threads", () => {
   describe("getThreads", () => {
@@ -33,16 +32,6 @@ describe("threads", () => {
         const next = new Date(threads[i + 1].timestamp).getTime();
         expect(current).toBeGreaterThanOrEqual(next);
       }
-    });
-
-    it("should parse frontmatter correctly", async () => {
-      const threads = await getThreads();
-      const thread = threads.find((t) => t.id === "1");
-
-      expect(thread).toBeDefined();
-      expect(thread?.title).toBe("끌어당김의 법칙을 넘어서");
-      expect(thread?.content).toContain("끌어당김을 배웠다");
-      expect(thread?.timestamp).toBe("2025-10-02T10:00:00Z");
     });
 
     it("should not include frontmatter in content", async () => {

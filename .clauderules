@@ -1,0 +1,105 @@
+# Claude Code 프로젝트 규칙
+
+## 코드 스타일
+
+### JSX/TSX 주석 금지
+- JSX/TSX 파일에서 `{/* 주석 */}` 형식의 주석을 사용하지 않습니다
+- 코드의 의도가 명확하지 않다면 변수명이나 함수명을 개선하거나, 필요시 TypeScript 주석(`// 주석`)을 사용합니다
+- 섹션 구분이 필요하다면 빈 줄이나 컴포넌트 분리로 해결합니다
+
+### 타입스크립트
+- JSDoc 주석(`/** ... */`)은 필요한 경우에만 사용합니다
+- 타입 정의는 명확하고 간결하게 작성합니다
+
+### 중복 제거
+- 코드를 작성할 때 중복을 제거합니다
+- 동일한 로직이 여러 곳에 존재한다면 공통 함수나 유틸리티로 추출합니다
+- 여러 데이터 소스가 있다면 단일 소스로 통합합니다
+
+## 데이터 관리
+
+### 중앙 집중식 설정
+- 모든 사이트 설정과 목 데이터는 `src/shared/config/site.ts`에 통합 관리합니다
+- 각 페이지에서 하드코딩하지 않고 SITE_CONFIG를 참조합니다
+
+### 단일 데이터 소스 원칙
+- 동일한 도메인 데이터를 다루는 함수는 entities 레이어에 통합합니다
+- 예: `src/entities/post/api/posts.ts`에서 모든 포스트 관련 API 제공
+- 중복된 데이터 fetching 로직은 반드시 제거합니다
+
+## 아키텍처
+
+### FSD (Feature-Sliced Design) + Next.js App Router
+- 계층 구조: app → views → widgets → features → entities → shared
+- 상위 레이어는 하위 레이어만 참조 가능합니다
+- entities 레이어를 통한 데이터 접근을 우선시합니다
+
+### 레이어별 역할
+- **app/**: Next.js App Router (라우팅만 담당, 최소 코드)
+- **views/**: 페이지 조합 레이어 (widgets/features/entities 조합)
+- **widgets/**: 재사용 가능한 큰 UI 블록 (layout, header, footer 등)
+- **features/**: 비즈니스 기능 단위 (search, theme, comments 등)
+- **entities/**: 도메인 엔티티 (post, user, thread - api/model/lib/ui)
+- **shared/**: 공통 자원 (ui, lib, config)
+
+### 파일 구조 규칙
+- `views/`: flat 구조 (HomePage.tsx, AboutPage.tsx 등)
+- `widgets/`: 도메인별 폴더 구조 (page/, post/, user/, thread/)
+- `features/`, `entities/`: 폴더별 index.ts로 export
+- `entities/`: api, model, lib, ui 서브폴더 구조
+
+### FSD 구조 설계 결정사항
+
+#### 언제 폴더를 나누는가?
+
+**views/ - Flat 구조**
+- 페이지는 많지 않음 (6-10개 정도)
+- 단순 조합 레이어이므로 복잡도 낮음
+- 파일명만으로 충분히 구분 가능
+- 결정: **flat 구조 유지**
+
+**widgets/ - 폴더 구조**
+- 위젯은 계속 증가 가능 (20개 이상 예상)
+- 도메인별 그룹화 필요 (page/, post/, user/, thread/)
+- 나중에 각 위젯에 lib/, model/ 추가 가능
+- 결정: **도메인별 폴더 구조**
+
+#### entities/ui vs widgets 구분
+
+**entities/[entity]/ui - 최소 단위 표현**
+- 도메인 지식이 포함된 가장 작은 UI 표현
+- 예: UserAvatar (GitHub URL 생성, fallback 로직)
+- 다른 컴포넌트를 조합하지 않음
+- 재사용 가능한 최소 단위
+
+**widgets/[domain] - 조합과 레이아웃**
+- 여러 컴포넌트를 조합
+- 복잡한 레이아웃과 로직
+- 예: Bio (UserAvatar + Badge + Button 조합)
+- 예: ThreadCard (UserAvatar + Card + formatTimeAgo)
+
+**판단 기준:**
+- 조합인가? → widget
+- 최소 표현인가? → entity/ui
+- 복잡한 레이아웃인가? → widget
+- 도메인 로직만 있는가? → entity/ui
+
+## 커밋 전 검증
+
+### 개발 서버 확인
+- 커밋하기 전에 반드시 `npm run dev`로 개발 서버가 정상 작동하는지 확인합니다
+- 빌드 에러, 타입 에러, import 에러 등이 없는지 확인합니다
+- 에러가 있다면 수정 후 커밋합니다
+
+### 커밋 메시지 작성 프로세스
+1. **전체 변경사항 파악**
+   - `git status` - 변경된 파일 목록 확인
+   - `git diff --stat` - 변경 규모 파악
+   - `git diff` (주요 파일) - 실제 변경 내용 확인
+2. **맥락 이해**
+   - 마지막 수정 사항만 보지 말고 전체 변경의 목적과 맥락 이해
+   - 여러 파일의 변경사항이 어떻게 연결되는지 파악
+3. **커밋 메시지 작성**
+   - 전체 변경사항을 포괄하는 명확한 제목
+   - 주요 변경사항을 구체적으로 나열
+   - 변경 이유와 효과 설명
