@@ -1,5 +1,5 @@
 import { AboutPage } from "@/views";
-import { getThreads } from "@/entities/thread/lib/threads";
+import { getThreads } from "@/entities/thread";
 
 export default async function About() {
   const threads = await getThreads();

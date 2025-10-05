@@ -1,8 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
-import { Post, PostFrontmatter, PostSummary, PostsFilter, PostsSort, PostNavigation } from './types';
-import { calculateReadingTime, generateSlugFromPath, extractTableOfContents } from './utils';
+import { Post, PostFrontmatter, PostSummary, PostsFilter, PostsSort, PostNavigation, TableOfContentsItem } from './types';
 
 const POSTS_PATH = path.join(process.cwd(), 'content/posts');
 
@@ -270,4 +269,79 @@ function postToSummary(post: Post): PostSummary {
     readingTime: post.readingTime,
     thumbnail: post.frontmatter.thumbnail
   };
+}
+
+// Utility functions (only used internally)
+
+function calculateReadingTime(content: string): number {
+  const wordsPerMinute = 200;
+  const words = content.trim().split(/\s+/).filter(word => word.length > 0).length;
+  const readingTime = Math.ceil(words / wordsPerMinute);
+  return Math.max(1, readingTime);
+}
+
+function generateSlugFromPath(filePath: string): string {
+  const relativePath = path.relative(path.join(process.cwd(), 'content/posts'), filePath);
+
+  if (path.basename(filePath, path.extname(filePath)) === 'index') {
+    return path.dirname(relativePath);
+  }
+
+  return path.basename(relativePath, path.extname(relativePath));
+}
+
+function extractTableOfContents(content: string): TableOfContentsItem[] {
+  const headingRegex = /^(#{1,6})\s+(.+)$/gm;
+  const headings: { level: number; title: string; id: string }[] = [];
+
+  let match;
+  while ((match = headingRegex.exec(content)) !== null) {
+    const level = match[1].length;
+    const title = match[2].trim();
+    const id = generateHeadingId(title);
+
+    headings.push({ level, title, id });
+  }
+
+  return buildTocTree(headings);
+}
+
+function generateHeadingId(title: string): string {
+  return title
+    .toLowerCase()
+    .replace(/[^\w\s가-힣]/g, '')
+    .replace(/\s+/g, '-')
+    .trim();
+}
+
+function buildTocTree(headings: { level: number; title: string; id: string }[]): TableOfContentsItem[] {
+  const tree: TableOfContentsItem[] = [];
+  const stack: TableOfContentsItem[] = [];
+
+  for (const heading of headings) {
+    const item: TableOfContentsItem = {
+      text: heading.title,
+      level: heading.level,
+      anchor: heading.id,
+      children: []
+    };
+
+    while (stack.length > 0 && stack[stack.length - 1].level >= heading.level) {
+      stack.pop();
+    }
+
+    if (stack.length === 0) {
+      tree.push(item);
+    } else {
+      const parent = stack[stack.length - 1];
+      if (!parent.children) {
+        parent.children = [];
+      }
+      parent.children.push(item);
+    }
+
+    stack.push(item);
+  }
+
+  return tree;
 }
