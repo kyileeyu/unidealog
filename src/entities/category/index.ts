@@ -1,2 +1,2 @@
-export type { Category, CategoryWithPosts } from './model/types';
-export { categoryToSlug, slugToCategory, getCategoryColor, getCategoryIcon } from './lib/utils';
+export type { Category, CategoryWithPosts } from './types';
+export { categoryToSlug, slugToCategory, getCategoryColor, getCategoryIcon } from './utils';

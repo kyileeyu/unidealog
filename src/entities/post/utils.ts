@@ -1,5 +1,5 @@
 import path from 'path';
-import { TableOfContentsItem } from '../model/types';
+import { TableOfContentsItem } from './types';
 
 /**
  * Calculate reading time based on word count
@@ -17,12 +17,12 @@ export function calculateReadingTime(content: string): number {
  */
 export function generateSlugFromPath(filePath: string): string {
   const relativePath = path.relative(path.join(process.cwd(), 'content/posts'), filePath);
-  
+
   // If it's an index file in a directory, use the directory name
   if (path.basename(filePath, path.extname(filePath)) === 'index') {
     return path.dirname(relativePath);
   }
-  
+
   // Otherwise, use the filename without extension
   return path.basename(relativePath, path.extname(relativePath));
 }
@@ -33,16 +33,16 @@ export function generateSlugFromPath(filePath: string): string {
 export function extractTableOfContents(content: string): TableOfContentsItem[] {
   const headingRegex = /^(#{1,6})\s+(.+)$/gm;
   const headings: { level: number; title: string; id: string }[] = [];
-  
+
   let match;
   while ((match = headingRegex.exec(content)) !== null) {
     const level = match[1].length;
     const title = match[2].trim();
     const id = generateHeadingId(title);
-    
+
     headings.push({ level, title, id });
   }
-  
+
   return buildTocTree(headings);
 }
 
@@ -63,7 +63,7 @@ export function generateHeadingId(title: string): string {
 function buildTocTree(headings: { level: number; title: string; id: string }[]): TableOfContentsItem[] {
   const tree: TableOfContentsItem[] = [];
   const stack: TableOfContentsItem[] = [];
-  
+
   for (const heading of headings) {
     const item: TableOfContentsItem = {
       text: heading.title,
@@ -71,12 +71,12 @@ function buildTocTree(headings: { level: number; title: string; id: string }[]):
       anchor: heading.id,
       children: []
     };
-    
+
     // Find the correct parent level
     while (stack.length > 0 && stack[stack.length - 1].level >= heading.level) {
       stack.pop();
     }
-    
+
     if (stack.length === 0) {
       // Root level
       tree.push(item);
@@ -88,10 +88,10 @@ function buildTocTree(headings: { level: number; title: string; id: string }[]):
       }
       parent.children.push(item);
     }
-    
+
     stack.push(item);
   }
-  
+
   return tree;
 }
 
@@ -100,7 +100,7 @@ function buildTocTree(headings: { level: number; title: string; id: string }[]):
  */
 export function formatDate(dateString: string, locale: string = 'ko-KR'): string {
   const date = new Date(dateString);
-  
+
   if (locale === 'ko-KR') {
     return date.toLocaleDateString('ko-KR', {
       year: 'numeric',
@@ -108,7 +108,7 @@ export function formatDate(dateString: string, locale: string = 'ko-KR'): string
       day: 'numeric'
     });
   }
-  
+
   return date.toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'long',
@@ -123,7 +123,7 @@ export function formatRelativeDate(dateString: string, locale: string = 'ko-KR')
   const date = new Date(dateString);
   const now = new Date();
   const diffInSeconds = Math.floor((now.getTime() - date.getTime()) / 1000);
-  
+
   const intervals = {
     year: 31536000,
     month: 2592000,
@@ -132,7 +132,7 @@ export function formatRelativeDate(dateString: string, locale: string = 'ko-KR')
     hour: 3600,
     minute: 60
   };
-  
+
   for (const [unit, seconds] of Object.entries(intervals)) {
     const interval = Math.floor(diffInSeconds / seconds);
     if (interval >= 1) {
@@ -151,7 +151,7 @@ export function formatRelativeDate(dateString: string, locale: string = 'ko-KR')
       }
     }
   }
-  
+
   return locale === 'ko-KR' ? '방금 전' : 'just now';
 }
 
@@ -162,7 +162,7 @@ export function truncateText(text: string, maxLength: number): string {
   if (text.length <= maxLength) {
     return text;
   }
-  
+
   return text.slice(0, maxLength).trim() + '...';
 }
 
@@ -173,6 +173,6 @@ export function getReadingTimeText(minutes: number, locale: string = 'ko-KR'): s
   if (locale === 'ko-KR') {
     return `${minutes}분 읽기`;
   }
-  
+
   return `${minutes} min read`;
 }

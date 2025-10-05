@@ -1,3 +1,3 @@
-export type { User, UserBio, UserSocial } from './model/types';
+export type { User, UserBio, UserSocial } from './types';
 export { UserAvatar } from './ui/UserAvatar';
-export { getUserDisplayName, getUserBioDescription, validateSocialLinks } from './lib/utils';
+export { getUserDisplayName, getUserBioDescription, validateSocialLinks } from './utils';

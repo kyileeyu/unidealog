@@ -1,4 +1,4 @@
-import { User } from '../model/types';
+import { User } from './types';
 
 /**
  * Get user display name

@@ -9,5 +9,5 @@ export interface Category {
 }
 
 export interface CategoryWithPosts extends Category {
-  posts: import('../../post/model/types').PostSummary[];
+  posts: import('../post/types').PostSummary[];
 }

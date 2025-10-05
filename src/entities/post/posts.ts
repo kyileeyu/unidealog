@@ -1,8 +1,8 @@
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
-import { Post, PostFrontmatter, PostSummary, PostsFilter, PostsSort, PostNavigation } from '../model/types';
-import { calculateReadingTime, generateSlugFromPath, extractTableOfContents } from '../lib/utils';
+import { Post, PostFrontmatter, PostSummary, PostsFilter, PostsSort, PostNavigation } from './types';
+import { calculateReadingTime, generateSlugFromPath, extractTableOfContents } from './utils';
 
 const POSTS_PATH = path.join(process.cwd(), 'content/posts');
 
@@ -53,7 +53,7 @@ export async function getPostSummaries(filter?: PostsFilter, sort?: PostsSort): 
           post.frontmatter.tags.join(' '),
           post.frontmatter.categories.join(' ')
         ].join(' ').toLowerCase();
-        
+
         if (!searchFields.includes(query)) {
           return false;
         }
@@ -111,17 +111,17 @@ export async function getPostBySlug(slug: string): Promise<Post | null> {
 export async function getPostNavigation(currentSlug: string): Promise<PostNavigation> {
   const posts = await getAllPosts();
   const currentIndex = posts.findIndex((post) => post.slug === currentSlug);
-  
+
   if (currentIndex === -1) {
     return {};
   }
 
   const navigation: PostNavigation = {};
-  
+
   if (currentIndex > 0) {
     navigation.previous = postToSummary(posts[currentIndex - 1]);
   }
-  
+
   if (currentIndex < posts.length - 1) {
     navigation.next = postToSummary(posts[currentIndex + 1]);
   }
@@ -135,7 +135,7 @@ export async function getPostNavigation(currentSlug: string): Promise<PostNaviga
 export async function getAllCategories(): Promise<string[]> {
   const posts = await getAllPosts();
   const categories = new Set<string>();
-  
+
   posts.forEach((post) => {
     post.frontmatter.categories.forEach((category) => {
       categories.add(category);
@@ -151,7 +151,7 @@ export async function getAllCategories(): Promise<string[]> {
 export async function getAllTags(): Promise<string[]> {
   const posts = await getAllPosts();
   const tags = new Set<string>();
-  
+
   posts.forEach((post) => {
     post.frontmatter.tags.forEach((tag) => {
       tags.add(tag);
@@ -187,12 +187,12 @@ function getPostFiles(dir: string): string[] {
 
   for (const item of items) {
     const itemPath = path.join(dir, item.name);
-    
+
     if (item.isDirectory()) {
       // Check for index.md or index.mdx in subdirectory
       const indexMd = path.join(itemPath, 'index.md');
       const indexMdx = path.join(itemPath, 'index.mdx');
-      
+
       if (fs.existsSync(indexMd)) {
         files.push(indexMd);
       } else if (fs.existsSync(indexMdx)) {
@@ -210,7 +210,7 @@ async function getPostByPath(filePath: string): Promise<Post | null> {
   try {
     const fileContent = fs.readFileSync(filePath, 'utf8');
     const { data, content } = matter(fileContent);
-    
+
     // Parse frontmatter
     const frontmatter: PostFrontmatter = {
       title: data.title || '',
@@ -227,14 +227,14 @@ async function getPostByPath(filePath: string): Promise<Post | null> {
 
     // Generate slug from file path
     const slug = generateSlugFromPath(filePath);
-    
+
     // Calculate reading time and word count
     const readingTime = calculateReadingTime(content);
     const wordCount = content.split(/\s+/).length;
-    
+
     // Extract table of contents
     const toc = extractTableOfContents(content);
-    
+
     // Generate excerpt if not provided
     const excerpt = frontmatter.description || content.slice(0, 200).replace(/[#*`]/g, '').trim() + '...';
 
