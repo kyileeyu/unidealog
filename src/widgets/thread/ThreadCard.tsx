@@ -1,7 +1,7 @@
-import { Thread } from "@/entities/thread/lib/threads";
+import { Thread } from "@/entities/thread";
 import { formatTimeAgo } from "@/shared/lib/utils";
 import { Card, CardContent } from "@/shared/ui/card";
-import { UserAvatar } from "@/entities/user";
+import { UserAvatar } from "@/widgets/user/UserAvatar";
 
 interface ThreadCardProps {
   thread: Thread;

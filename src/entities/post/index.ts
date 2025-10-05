@@ -18,14 +18,3 @@ export {
   getPostsByCategory,
   getPostsByTag
 } from './posts';
-
-export {
-  calculateReadingTime,
-  generateSlugFromPath,
-  extractTableOfContents,
-  generateHeadingId,
-  formatDate,
-  formatRelativeDate,
-  truncateText,
-  getReadingTimeText
-} from './utils';
