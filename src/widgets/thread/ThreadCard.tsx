@@ -1,7 +1,9 @@
-import { Thread } from "@/entities/thread/lib/threads";
-import { formatTimeAgo } from "@/shared/lib/utils";
+"use client";
+
+import { Thread } from "@/entities/thread";
 import { Card, CardContent } from "@/shared/ui/card";
-import { UserAvatar } from "@/entities/user";
+import { TimeAgo } from "@/shared/ui/TimeAgo";
+import { UserAvatar } from "@/widgets/user/UserAvatar";
 
 interface ThreadCardProps {
   thread: Thread;
@@ -17,9 +19,10 @@ export function ThreadCard({ thread }: ThreadCardProps) {
             <div className="mb-3">
               <span className="text-sm font-medium">{thread.title}</span>
               <span className="text-sm text-muted-foreground mx-2">·</span>
-              <span className="text-sm text-muted-foreground">
-                {formatTimeAgo(thread.timestamp)}
-              </span>
+              <TimeAgo
+                timestamp={thread.timestamp}
+                className="text-sm text-muted-foreground"
+              />
             </div>
             <p className="whitespace-pre-wrap text-sm leading-relaxed">
               {thread.content}

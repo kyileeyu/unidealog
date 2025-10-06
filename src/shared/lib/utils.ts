@@ -7,7 +7,10 @@ export function formatDate(date: Date | string): string {
   });
 }
 
-export function formatTimeAgo(timestamp: string, now: Date = new Date()): string {
+export function formatTimeAgo(
+  timestamp: string,
+  now: Date = new Date()
+): string {
   const past = new Date(timestamp);
   const diffInSeconds = Math.floor((now.getTime() - past.getTime()) / 1000);
 
@@ -15,31 +18,23 @@ export function formatTimeAgo(timestamp: string, now: Date = new Date()): string
     return "방금 전";
   }
 
-  const diffInMinutes = Math.floor(diffInSeconds / 60);
-  if (diffInMinutes < 60) {
-    return `${diffInMinutes}분`;
+  const rtf = new Intl.RelativeTimeFormat("ko", { numeric: "auto" });
+
+  const units: { unit: Intl.RelativeTimeFormatUnit; seconds: number }[] = [
+    { unit: "year", seconds: 31536000 },
+    { unit: "month", seconds: 2592000 },
+
+    { unit: "day", seconds: 86400 },
+    { unit: "hour", seconds: 3600 },
+    { unit: "minute", seconds: 60 },
+  ];
+
+  for (const { unit, seconds } of units) {
+    const diff = Math.floor(diffInSeconds / seconds);
+    if (diff >= 1) {
+      return rtf.format(-diff, unit);
+    }
   }
 
-  const diffInHours = Math.floor(diffInMinutes / 60);
-  if (diffInHours < 24) {
-    return `${diffInHours}시간`;
-  }
-
-  const diffInDays = Math.floor(diffInHours / 24);
-  if (diffInDays < 7) {
-    return `${diffInDays}일`;
-  }
-
-  const diffInWeeks = Math.floor(diffInDays / 7);
-  if (diffInWeeks < 4) {
-    return `${diffInWeeks}주`;
-  }
-
-  const diffInMonths = Math.floor(diffInDays / 30);
-  if (diffInMonths < 12) {
-    return `${diffInMonths}개월`;
-  }
-
-  const diffInYears = Math.floor(diffInDays / 365);
-  return `${diffInYears}년`;
+  return "방금 전";
 }

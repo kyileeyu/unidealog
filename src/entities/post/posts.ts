@@ -1,8 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
-import { Post, PostFrontmatter, PostSummary, PostsFilter, PostsSort, PostNavigation } from '../model/types';
-import { calculateReadingTime, generateSlugFromPath, extractTableOfContents } from '../lib/utils';
+import { Post, PostFrontmatter, PostSummary, PostsFilter, PostsSort, PostNavigation, TableOfContentsItem } from './types';
 
 const POSTS_PATH = path.join(process.cwd(), 'content/posts');
 
@@ -53,7 +52,7 @@ export async function getPostSummaries(filter?: PostsFilter, sort?: PostsSort): 
           post.frontmatter.tags.join(' '),
           post.frontmatter.categories.join(' ')
         ].join(' ').toLowerCase();
-        
+
         if (!searchFields.includes(query)) {
           return false;
         }
@@ -111,17 +110,17 @@ export async function getPostBySlug(slug: string): Promise<Post | null> {
 export async function getPostNavigation(currentSlug: string): Promise<PostNavigation> {
   const posts = await getAllPosts();
   const currentIndex = posts.findIndex((post) => post.slug === currentSlug);
-  
+
   if (currentIndex === -1) {
     return {};
   }
 
   const navigation: PostNavigation = {};
-  
+
   if (currentIndex > 0) {
     navigation.previous = postToSummary(posts[currentIndex - 1]);
   }
-  
+
   if (currentIndex < posts.length - 1) {
     navigation.next = postToSummary(posts[currentIndex + 1]);
   }
@@ -135,7 +134,7 @@ export async function getPostNavigation(currentSlug: string): Promise<PostNaviga
 export async function getAllCategories(): Promise<string[]> {
   const posts = await getAllPosts();
   const categories = new Set<string>();
-  
+
   posts.forEach((post) => {
     post.frontmatter.categories.forEach((category) => {
       categories.add(category);
@@ -151,7 +150,7 @@ export async function getAllCategories(): Promise<string[]> {
 export async function getAllTags(): Promise<string[]> {
   const posts = await getAllPosts();
   const tags = new Set<string>();
-  
+
   posts.forEach((post) => {
     post.frontmatter.tags.forEach((tag) => {
       tags.add(tag);
@@ -187,12 +186,12 @@ function getPostFiles(dir: string): string[] {
 
   for (const item of items) {
     const itemPath = path.join(dir, item.name);
-    
+
     if (item.isDirectory()) {
       // Check for index.md or index.mdx in subdirectory
       const indexMd = path.join(itemPath, 'index.md');
       const indexMdx = path.join(itemPath, 'index.mdx');
-      
+
       if (fs.existsSync(indexMd)) {
         files.push(indexMd);
       } else if (fs.existsSync(indexMdx)) {
@@ -210,7 +209,7 @@ async function getPostByPath(filePath: string): Promise<Post | null> {
   try {
     const fileContent = fs.readFileSync(filePath, 'utf8');
     const { data, content } = matter(fileContent);
-    
+
     // Parse frontmatter
     const frontmatter: PostFrontmatter = {
       title: data.title || '',
@@ -227,14 +226,14 @@ async function getPostByPath(filePath: string): Promise<Post | null> {
 
     // Generate slug from file path
     const slug = generateSlugFromPath(filePath);
-    
+
     // Calculate reading time and word count
     const readingTime = calculateReadingTime(content);
     const wordCount = content.split(/\s+/).length;
-    
+
     // Extract table of contents
     const toc = extractTableOfContents(content);
-    
+
     // Generate excerpt if not provided
     const excerpt = frontmatter.description || content.slice(0, 200).replace(/[#*`]/g, '').trim() + '...';
 
@@ -270,4 +269,79 @@ function postToSummary(post: Post): PostSummary {
     readingTime: post.readingTime,
     thumbnail: post.frontmatter.thumbnail
   };
+}
+
+// Utility functions (only used internally)
+
+function calculateReadingTime(content: string): number {
+  const wordsPerMinute = 200;
+  const words = content.trim().split(/\s+/).filter(word => word.length > 0).length;
+  const readingTime = Math.ceil(words / wordsPerMinute);
+  return Math.max(1, readingTime);
+}
+
+function generateSlugFromPath(filePath: string): string {
+  const relativePath = path.relative(path.join(process.cwd(), 'content/posts'), filePath);
+
+  if (path.basename(filePath, path.extname(filePath)) === 'index') {
+    return path.dirname(relativePath);
+  }
+
+  return path.basename(relativePath, path.extname(relativePath));
+}
+
+function extractTableOfContents(content: string): TableOfContentsItem[] {
+  const headingRegex = /^(#{1,6})\s+(.+)$/gm;
+  const headings: { level: number; title: string; id: string }[] = [];
+
+  let match;
+  while ((match = headingRegex.exec(content)) !== null) {
+    const level = match[1].length;
+    const title = match[2].trim();
+    const id = generateHeadingId(title);
+
+    headings.push({ level, title, id });
+  }
+
+  return buildTocTree(headings);
+}
+
+function generateHeadingId(title: string): string {
+  return title
+    .toLowerCase()
+    .replace(/[^\w\s가-힣]/g, '')
+    .replace(/\s+/g, '-')
+    .trim();
+}
+
+function buildTocTree(headings: { level: number; title: string; id: string }[]): TableOfContentsItem[] {
+  const tree: TableOfContentsItem[] = [];
+  const stack: TableOfContentsItem[] = [];
+
+  for (const heading of headings) {
+    const item: TableOfContentsItem = {
+      text: heading.title,
+      level: heading.level,
+      anchor: heading.id,
+      children: []
+    };
+
+    while (stack.length > 0 && stack[stack.length - 1].level >= heading.level) {
+      stack.pop();
+    }
+
+    if (stack.length === 0) {
+      tree.push(item);
+    } else {
+      const parent = stack[stack.length - 1];
+      if (!parent.children) {
+        parent.children = [];
+      }
+      parent.children.push(item);
+    }
+
+    stack.push(item);
+  }
+
+  return tree;
 }

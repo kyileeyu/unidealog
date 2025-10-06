@@ -1,12 +1,12 @@
-export type { 
-  Post, 
-  PostFrontmatter, 
-  PostSummary, 
-  PostsFilter, 
-  PostsSort, 
+export type {
+  Post,
+  PostFrontmatter,
+  PostSummary,
+  PostsFilter,
+  PostsSort,
   PostNavigation,
   TableOfContentsItem
-} from './model/types';
+} from './types';
 
 export {
   getAllPosts,
@@ -17,15 +17,4 @@ export {
   getAllTags,
   getPostsByCategory,
   getPostsByTag
-} from './api/posts';
-
-export {
-  calculateReadingTime,
-  generateSlugFromPath,
-  extractTableOfContents,
-  generateHeadingId,
-  formatDate,
-  formatRelativeDate,
-  truncateText,
-  getReadingTimeText
-} from './lib/utils';
+} from './posts';

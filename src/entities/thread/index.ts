@@ -1,1 +1,2 @@
-export { getThreads, type Thread } from "./lib/threads";
+export type { Thread } from './threads';
+export { getThreads } from './threads';

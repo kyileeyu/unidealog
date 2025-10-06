@@ -1,4 +1,4 @@
-import { getThreads } from "@/entities/thread/lib/threads";
+import { getThreads } from "@/entities/thread";
 
 describe("threads", () => {
   describe("getThreads", () => {
