@@ -123,3 +123,21 @@
     font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
   }
 }
+
+/* 이력서 프린트 스타일 */
+@media print {
+  body {
+    background: white !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .resume-page-break {
+    break-after: page;
+  }
+
+  @page {
+    size: A4;
+    margin: 0;
+  }
+}
