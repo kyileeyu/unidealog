@@ -7,9 +7,9 @@ import {
 
 export function ResumePageTwo() {
   return (
-    <div className="w-[210mm] min-h-[297mm] bg-white text-black px-[48px] py-[48px] print:shadow-none flex flex-col gap-[28px]">
-      <ResumeSection title="업무 경험" divider>
-        <div className="flex flex-col gap-[24px]">
+    <div className="w-[210mm] min-h-[297mm] bg-white text-resume-foreground px-[48px] py-[44px] print:shadow-none flex flex-col gap-[32px]">
+      <ResumeSection title="업무 경험">
+        <div className="flex flex-col gap-[28px]">
           {/* #2 — Auth SDK 모노레포 전환 */}
           <WorkExperienceItem
             title="Auth SDK 모노레포 전환"

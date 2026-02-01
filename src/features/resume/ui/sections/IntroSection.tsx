@@ -3,7 +3,7 @@ import { ResumeSection } from "./ResumeSection";
 export function IntroSection() {
   return (
     <ResumeSection title="자기 소개">
-      <div className="flex flex-col gap-[2px] text-[14px] leading-[1.8]">
+      <div className="flex flex-col gap-[4px] text-[14px] leading-[1.8] text-resume-foreground tracking-[-0.01em]">
         <p>3년간 하나의 프로덕트를 성장시켜온 4년차 프론트엔드 개발자입니다.</p>
         <p>
           신입으로 입사해 현재 11개국 수십 곳의 기업이 실제로 사용하는 B2B2C

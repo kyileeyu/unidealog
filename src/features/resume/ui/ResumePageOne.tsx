@@ -9,13 +9,13 @@ import {
 
 export function ResumePageOne() {
   return (
-    <div className="w-[210mm] min-h-[297mm] bg-white text-black px-[48px] py-[48px] print:shadow-none flex flex-col gap-[28px]">
+    <div className="w-[210mm] min-h-[297mm] bg-white text-resume-foreground px-[48px] py-[44px] print:shadow-none flex flex-col gap-[32px]">
       <HeaderSection />
       <IntroSection />
       <CareerSection />
       <SkillsSection />
 
-      <ResumeSection title="업무 경험" divider>
+      <ResumeSection title="업무 경험">
         <WorkExperienceItem
           title="상태관리 아키텍처 재설계"
           yearTech={

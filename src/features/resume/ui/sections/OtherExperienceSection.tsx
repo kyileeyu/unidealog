@@ -2,8 +2,8 @@ import { ResumeSection } from "./ResumeSection";
 
 export function OtherExperienceSection() {
   return (
-    <ResumeSection title="기타 경험" divider>
-      <ul className="list-disc pl-[20px] flex flex-col gap-[6px] text-[13px] leading-[1.7]">
+    <ResumeSection title="기타 경험">
+      <ul className="list-disc pl-[18px] flex flex-col gap-[7px] text-[13px] leading-[1.65] text-resume-foreground marker:text-resume-muted-foreground">
         <li>
           2026.01 ~2026.02 |Teams 책 구매요청 봇 생성 | lambda + aws를 이용하여
           playwright e2e를 통해 생성

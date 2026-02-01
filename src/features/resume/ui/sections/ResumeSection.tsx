@@ -2,19 +2,19 @@ import type { ReactNode } from "react";
 
 interface ResumeSectionProps {
   title: string;
-  divider?: boolean;
   children: ReactNode;
 }
 
 export function ResumeSection({
   title,
-  divider = false,
   children,
 }: ResumeSectionProps) {
   return (
     <section>
-      <h2 className="text-[21px] font-bold mb-[12px]">{title}</h2>
-      {divider && <hr className="border-t border-gray-200 mb-[12px]" />}
+      <div className="flex items-center gap-[8px] mb-[14px]">
+        <div className="w-[3px] h-[20px] bg-resume-foreground rounded-full shrink-0" />
+        <h2 className="text-[20px] font-bold tracking-[-0.02em]">{title}</h2>
+      </div>
       {children}
     </section>
   );
