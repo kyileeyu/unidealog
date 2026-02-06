@@ -43,6 +43,8 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+  --color-resume-foreground: var(--resume-foreground);
+  --color-resume-muted-foreground: var(--resume-muted-foreground);
 }
 
 :root {
@@ -70,6 +72,8 @@
   --chart-3: oklch(0.398 0.07 227.392);
   --chart-4: oklch(0.828 0.189 84.429);
   --chart-5: oklch(0.769 0.188 70.08);
+  --resume-foreground: #302C2C;
+  --resume-muted-foreground: #6A6262;
   --sidebar: #F5F4F1;
   --sidebar-foreground: #2D2D2D;
   --sidebar-primary: #2D2D2D;
@@ -121,5 +125,28 @@
   body {
     @apply bg-background text-foreground;
     font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  }
+}
+
+/* 이력서 작은 불릿 */
+.resume-bullets li::marker {
+  font-size: 8px;
+}
+
+/* 이력서 프린트 스타일 */
+@media print {
+  body {
+    background: white !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .resume-page-break {
+    break-after: page;
+  }
+
+  @page {
+    size: A4;
+    margin: 0;
   }
 }
