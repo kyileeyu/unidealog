@@ -8,7 +8,7 @@ import {
 
 export function ResumePageOne() {
   return (
-    <div className="w-[210mm] min-h-[297mm] bg-white text-resume-foreground px-[48px] py-[44px] print:shadow-none flex flex-col gap-[32px]">
+    <div className="w-[210mm] h-[297mm] bg-white text-resume-foreground px-[48px] py-[44px] print:shadow-none flex flex-col gap-[32px] overflow-hidden">
       <HeaderSection />
       <IntroSection />
       <CareerSection />
@@ -16,53 +16,92 @@ export function ResumePageOne() {
       <ResumeSection title="업무 경험">
         <WorkExperienceItem
           title="상태관리 아키텍처 재설계"
-          yearTech={
-            <>
-              2025 | React, TypeScript, Zustand,
-              <br />
-              TanStack Query, Jest
-            </>
-          }
-          details={
-            <div className="flex flex-col gap-[10px]">
-              <div className="grid grid-cols-[40px_1fr]">
-                <span className="font-semibold text-resume-foreground">역할</span>
-                <ul className="list-disc pl-[16px] flex flex-col gap-[2px]">
-                  <li>
-                    기존 백오피스 기능에 Cypress 기반{" "}
-                    <strong>E2E 테스트</strong> 도입 및 주요 버그 리포트/픽스
-                  </li>
-                  <li>
-                    JS 기반 Minimals UI 백오피스를{" "}
-                    <strong>TypeScript로 점진적 마이그레이션</strong>
-                  </li>
-                  <li>쿠폰, 기프트카드 발급/관리 페이지 신규 구현</li>
-                  <li>계정별 사용자 정보를 불러오는 Tenant 시스템 설계 및 반영</li>
-                  <li>UTC → Timezone 변환 메서드 및 기간별 데이터 Export 기능 구현</li>
-                </ul>
-              </div>
-              <div className="grid grid-cols-[40px_1fr]">
-                <span className="font-semibold text-resume-foreground">과정</span>
-                <ul className="list-disc pl-[16px] flex flex-col gap-[2px]">
-                  <li>
-                    Cypress 기반의 테스트 자동화 적용 중, JS 환경의 유지보수
-                    이슈를 체감하며 TypeScript 도입 필요성 제안 → 점진적
-                    마이그레이션 주도
-                  </li>
-                </ul>
-              </div>
-              <div className="grid grid-cols-[40px_1fr]">
-                <span className="font-semibold text-resume-foreground">성과</span>
-                <ul className="list-disc pl-[16px] flex flex-col gap-[2px]">
-                  <li>
-                    E2E <strong>테스트 커버리지 80%</strong> 이상 확보, 3개월
-                    내에 전체 백오피스의 <strong>90%</strong>를 TypeScript로
-                    변환하여 코드 품질 및 가독성 향상
-                  </li>
-                </ul>
-              </div>
-            </div>
-          }
+          period="2025.11 ~ 2026.02 (4개월)"
+          techStack="React, TypeScript, Zustand, TanStack Query, Jest"
+          details={{
+            role: (
+              <>
+                <li>
+                  페이지 진입 시 <strong>200개 이상의 API 요청</strong>이 발생해
+                  초기 로딩이 느린 문제 분석 및 해결
+                </li>
+                <li>
+                  Redux에서 서버 데이터와 UI 상태가 혼재되어 있는 구조 개선
+                </li>
+                <li>
+                  슬라이스 간 복잡한 의존성으로 인한 사이드이펙트 문제 해결
+                </li>
+              </>
+            ),
+            process: (
+              <>
+                <li>
+                  네트워크 탭 분석으로 불필요한 요청 패턴 파악 후{" "}
+                  <strong>서버 상태(React Query)</strong>와{" "}
+                  <strong>클라이언트 상태(Zustand)</strong> 분리 설계
+                </li>
+                <li>
+                  썸네일 이미지에 <strong>Intersection Observer</strong> 적용,
+                  화면 내 이미지만 요청하도록 개선
+                </li>
+                <li>
+                  React Query의 staleTime/cacheTime 전략으로 동일 데이터 재요청
+                  방지
+                </li>
+              </>
+            ),
+            result: (
+              <>
+                <li>
+                  초기 네트워크 요청 800개 → 50개로 <strong>94% 감소</strong>
+                </li>
+                <li>
+                  Redux 슬라이스 12개 → 6개로 <strong>50% 감소</strong>
+                </li>
+                <li>
+                  단위 테스트 0개 → <strong>183개</strong> 도입으로 리팩토링
+                  안정성 확보
+                </li>
+              </>
+            ),
+          }}
+        />
+        <WorkExperienceItem
+          title="Auth SDK 모노레포 전환"
+          period="2024.03 ~ 2025.04 (7개월)"
+          techStack="Pnpm, TypeScript, React, Changesets"
+          details={{
+            role: (
+              <>
+                <li>1인 개발로 프로젝트 셋업부터 배포까지 전 과정 주도</li>
+              </>
+            ),
+            process: (
+              <>
+                <li>
+                  기존 Auth SDK는 Axios에 의존적이라 fetch나 ky같은 다른 HTTP
+                  Client에 토큰을 주입하기 어려웠음. 인증 로직을{" "}
+                  <strong>클래스 기반으로 분리</strong>하여 fetch, ky 등 다양한
+                  HTTP Client에서 대응 가능하도록 개선
+                </li>
+                <li>
+                  Error Dialog가 React Context에 종속되어 있어, 알림 처리를 다른
+                  환경에서 사용할 수 없었음. <strong>Event Emitter</strong>를
+                  도입해 Context 없이도 적절한 에러 알림을 내려줄 수 있도록 구조
+                  변경
+                </li>
+              </>
+            ),
+            result: (
+              <>
+                <li>다양한 HTTP Client를 지원하는 범용 SDK로 전환</li>
+                <li>
+                  example 패키지를 추가하여 실제 사용 예시를 제공하여 동료
+                  개발자들의 적용 시간 단축 및 DX 향상
+                </li>
+              </>
+            ),
+          }}
         />
       </ResumeSection>
     </div>

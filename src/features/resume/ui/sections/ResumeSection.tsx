@@ -5,17 +5,13 @@ interface ResumeSectionProps {
   children: ReactNode;
 }
 
-export function ResumeSection({
-  title,
-  children,
-}: ResumeSectionProps) {
+export function ResumeSection({ title, children }: ResumeSectionProps) {
   return (
     <section>
-      <div className="flex items-center gap-[8px] mb-[14px]">
-        <div className="w-[3px] h-[20px] bg-resume-foreground rounded-full shrink-0" />
+      <div className="flex items-center gap-[8px] mb-[16px]">
         <h2 className="text-[20px] font-bold tracking-[-0.02em]">{title}</h2>
       </div>
-      {children}
+      <div className="flex flex-col gap-[32px]">{children}</div>
     </section>
   );
 }
