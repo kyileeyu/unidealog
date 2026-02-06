@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export function HeaderSection() {
   return (
-    <div className="flex items-start justify-between">
+    <div className="flex items-center justify-between">
       <div className="flex flex-col gap-[16px]">
         <div className="flex flex-col gap-[4px]">
           <h1 className="text-[26px] font-bold tracking-[-0.03em] leading-none">
@@ -13,23 +13,29 @@ export function HeaderSection() {
           </p>
         </div>
 
-        <div className="grid grid-cols-2 gap-x-[32px] gap-y-[6px] text-[13px]">
-          <span className="text-resume-muted-foreground">
-            kyileeeyu@gmail.com
-          </span>
-          <span className="text-resume-muted-foreground">010-5772-5514</span>
-          <a
-            href="https://linkedin.com/in/seunghyun-yu"
-            className="text-resume-muted-foreground underline underline-offset-2 decoration-gray-400"
-          >
-            linkedin.com/in/seunghyun-yu
-          </a>
-          <a
-            href="https://github.com/kyileeyu"
-            className="text-resume-muted-foreground underline underline-offset-2 decoration-gray-400"
-          >
-            github.com/kyileeyu
-          </a>
+        <div className="flex flex-col gap-[8px]">
+          <div className="flex items-center gap-[8px] text-[13px] text-resume-muted-foreground">
+            <span>kyileeeyu@gmail.com</span>
+            <span>·</span>
+            <span>010-5772-5514</span>
+            <span>·</span>
+            <a
+              href="https://linkedin.com/in/seunghyun-yu"
+              className="underline underline-offset-2 decoration-gray-400"
+            >
+              LinkedIn
+            </a>
+            <span>·</span>
+            <a
+              href="https://github.com/kyileeyu"
+              className="underline underline-offset-2 decoration-gray-400"
+            >
+              GitHub
+            </a>
+          </div>
+          <p className="text-[12px] text-resume-muted-foreground">
+            JavaScript · TypeScript · React · Jest · Playwright · Webpack · Vite · Git
+          </p>
         </div>
       </div>
 
