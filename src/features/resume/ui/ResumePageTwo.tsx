@@ -53,6 +53,29 @@ export function ResumePageTwo() {
         />
 
         <WorkExperienceItem
+          title="디자인 시스템 모노레포 전환 및 자동화"
+          period="2024.06 ~ 2024.12 (7개월)"
+          techStack="React, TypeScript, MUI v7, Turborepo, Figma API, Style Dictionary"
+          decisions={[
+            {
+              title: "외부 npm → 모노레포 마이그레이션",
+              description:
+                "14개 프로젝트에서 빌드 실패가 빈번하고 수정-배포 사이클이 2일 걸리는 문제를 해결하여, 변경사항 즉시 반영과 버전 일관성을 확보했습니다.",
+            },
+            {
+              title: "Figma 연동 토큰 자동화",
+              description:
+                "수동 반영으로 인한 디자인-코드 불일치와 4,000 LOC 중복 문제를 Style Dictionary로 자동화하여, 코드 37.5% 감소 및 설정 시간 80% 단축을 달성했습니다.",
+            },
+            {
+              title: "MUI v7 타입 호환성 해결",
+              description:
+                "52개 타입 에러가 발생했으나 as 단언 금지 원칙을 지키며, 타입 가드 패턴을 도입해 타입 안전성을 확보했습니다.",
+            },
+          ]}
+        />
+
+        <WorkExperienceItem
           title="프론트엔드 옵저버빌리티 시스템 구축"
           period="2026.01 ~ 2026.02 (2개월)"
           techStack="Grafana Faro SDK, OpenTelemetry, React, TypeScript, AWS NLB, K8s"

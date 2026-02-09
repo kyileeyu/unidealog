@@ -6,11 +6,17 @@ interface WorkExperienceDetails {
   result?: ReactNode;
 }
 
+interface Decision {
+  title: string;
+  description: string;
+}
+
 interface WorkExperienceItemProps {
   title: string;
   period: string;
   techStack: string;
-  details: WorkExperienceDetails;
+  details?: WorkExperienceDetails;
+  decisions?: Decision[];
 }
 
 function DetailSection({
@@ -30,11 +36,23 @@ function DetailSection({
   );
 }
 
+function DecisionItem({ decision }: { decision: Decision }) {
+  return (
+    <div className="flex flex-col gap-[2px]">
+      <p className="font-semibold text-resume-foreground">{decision.title}</p>
+      <ul className="list-disc pl-[16px]">
+        <li>{decision.description}</li>
+      </ul>
+    </div>
+  );
+}
+
 export function WorkExperienceItem({
   title,
   period,
   techStack,
   details,
+  decisions,
 }: WorkExperienceItemProps) {
   return (
     <div className="flex gap-[16px]">
@@ -53,17 +71,26 @@ export function WorkExperienceItem({
 
       {/* 우측 컬럼 */}
       <div className="flex-1 text-[12.5px] leading-[1.75] text-resume-foreground resume-bullets">
-        <div className="flex flex-col gap-[10px]">
-          {details.problem && (
-            <DetailSection label="문제">{details.problem}</DetailSection>
-          )}
-          {details.action && (
-            <DetailSection label="행동">{details.action}</DetailSection>
-          )}
-          {details.result && (
-            <DetailSection label="성과">{details.result}</DetailSection>
-          )}
-        </div>
+        {details && (
+          <div className="flex flex-col gap-[10px]">
+            {details.problem && (
+              <DetailSection label="문제">{details.problem}</DetailSection>
+            )}
+            {details.action && (
+              <DetailSection label="행동">{details.action}</DetailSection>
+            )}
+            {details.result && (
+              <DetailSection label="성과">{details.result}</DetailSection>
+            )}
+          </div>
+        )}
+        {decisions && (
+          <div className="flex flex-col gap-[10px]">
+            {decisions.map((decision, index) => (
+              <DecisionItem key={index} decision={decision} />
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
