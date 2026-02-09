@@ -19,48 +19,40 @@ export function ResumePageOne() {
           period="2025.11 ~ 2026.02 (4개월)"
           techStack="React, TypeScript, Zustand, TanStack Query, Jest"
           details={{
-            role: (
+            problem: (
               <>
                 <li>
-                  페이지 진입 시 <strong>200개 이상의 API 요청</strong>이 발생해
-                  초기 로딩이 느린 문제 분석 및 해결
+                  페이지 진입 시 <strong>800개 API 요청</strong> 발생 → 저속
+                  네트워크에서 사용자 이탈 발생
                 </li>
                 <li>
-                  Redux에서 서버 데이터와 UI 상태가 혼재되어 있는 구조 개선
-                </li>
-                <li>
-                  슬라이스 간 복잡한 의존성으로 인한 사이드이펙트 문제 해결
+                  Redux 슬라이스 간 암묵적 의존성으로 수정 시{" "}
+                  <strong>예측 불가능한 사이드이펙트</strong> 빈발
                 </li>
               </>
             ),
-            process: (
+            action: (
               <>
                 <li>
-                  네트워크 탭 분석으로 불필요한 요청 패턴 파악 후{" "}
-                  <strong>서버 상태(React Query)</strong>와{" "}
-                  <strong>클라이언트 상태(Zustand)</strong> 분리 설계
+                  전면 재작성 vs 점진적 마이그레이션 중{" "}
+                  <strong>후자 선택</strong> (테스트 0개 상태에서 빅뱅은 위험,
+                  서비스 중단 불가)
                 </li>
                 <li>
-                  썸네일 이미지에 <strong>Intersection Observer</strong> 적용,
-                  화면 내 이미지만 요청하도록 개선
-                </li>
-                <li>
-                  React Query의 staleTime/cacheTime 전략으로 동일 데이터 재요청
-                  방지
+                  <strong>테스트 183개 선작성</strong>으로 안전망 확보 후, 서버
+                  상태(React Query)와 클라이언트 상태(Zustand) 단계적 분리
                 </li>
               </>
             ),
             result: (
               <>
                 <li>
-                  초기 네트워크 요청 800개 → 50개로 <strong>94% 감소</strong>
+                  초기 네트워크 요청 <strong>94% 감소</strong>(800 → 50개),
+                  슬라이스 50% 감소(12 → 6개)
                 </li>
                 <li>
-                  Redux 슬라이스 12개 → 6개로 <strong>50% 감소</strong>
-                </li>
-                <li>
-                  단위 테스트 0개 → <strong>183개</strong> 도입으로 리팩토링
-                  안정성 확보
+                  4개월간 <strong>무중단 마이그레이션</strong> 완료, 이후 상태
+                  관련 버그 리포트 0건
                 </li>
               </>
             ),
@@ -71,33 +63,40 @@ export function ResumePageOne() {
           period="2024.03 ~ 2025.04 (7개월)"
           techStack="Pnpm, TypeScript, React, Changesets"
           details={{
-            role: (
-              <>
-                <li>1인 개발로 프로젝트 셋업부터 배포까지 전 과정 주도</li>
-              </>
-            ),
-            process: (
+            problem: (
               <>
                 <li>
-                  기존 Auth SDK는 Axios에 의존적이라 fetch나 ky같은 다른 HTTP
-                  Client에 토큰을 주입하기 어려웠음. 인증 로직을{" "}
-                  <strong>클래스 기반으로 분리</strong>하여 fetch, ky 등 다양한
-                  HTTP Client에서 대응 가능하도록 개선
+                  전사 <strong>6개 프로젝트</strong>가 각자 인증 로직 구현 →
+                  토큰 갱신 버그 반복 발생
                 </li>
                 <li>
-                  Error Dialog가 React Context에 종속되어 있어, 알림 처리를 다른
-                  환경에서 사용할 수 없었음. <strong>Event Emitter</strong>를
-                  도입해 Context 없이도 적절한 에러 알림을 내려줄 수 있도록 구조
-                  변경
+                  신규 Electron 앱에서 React Context 사용 불가 → 기존 SDK 적용
+                  불가
+                </li>
+              </>
+            ),
+            action: (
+              <>
+                <li>
+                  기존 SDK에 어댑터 추가 vs 코어 재설계 중{" "}
+                  <strong>후자 선택</strong> (인증은 모든 앱의 기반, 한 번 제대로
+                  만들면 장기 유지보수 유리)
+                </li>
+                <li>
+                  HTTP Client 의존성 제거를 위해 인증 로직을 프레임워크 무관하게
+                  분리, React 없는 환경 지원을 위해 Event 기반 알림 구조로 전환
                 </li>
               </>
             ),
             result: (
               <>
-                <li>다양한 HTTP Client를 지원하는 범용 SDK로 전환</li>
                 <li>
-                  example 패키지를 추가하여 실제 사용 예시를 제공하여 동료
-                  개발자들의 적용 시간 단축 및 DX 향상
+                  <strong>6개 프로젝트 인증 통합</strong>, 토큰 갱신 버그 근본
+                  해결
+                </li>
+                <li>
+                  신규 프로젝트 온보딩 시간 <strong>2주 → 2일</strong>로 단축
+                  (example 패키지 제공)
                 </li>
               </>
             ),

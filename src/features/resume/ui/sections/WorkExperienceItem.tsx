@@ -1,8 +1,8 @@
 import type { ReactNode } from "react";
 
 interface WorkExperienceDetails {
-  role?: ReactNode;
-  process?: ReactNode;
+  problem?: ReactNode;
+  action?: ReactNode;
   result?: ReactNode;
 }
 
@@ -54,11 +54,11 @@ export function WorkExperienceItem({
       {/* 우측 컬럼 */}
       <div className="flex-1 text-[12.5px] leading-[1.75] text-resume-foreground resume-bullets">
         <div className="flex flex-col gap-[10px]">
-          {details.role && (
-            <DetailSection label="역할">{details.role}</DetailSection>
+          {details.problem && (
+            <DetailSection label="문제">{details.problem}</DetailSection>
           )}
-          {details.process && (
-            <DetailSection label="과정">{details.process}</DetailSection>
+          {details.action && (
+            <DetailSection label="행동">{details.action}</DetailSection>
           )}
           {details.result && (
             <DetailSection label="성과">{details.result}</DetailSection>
