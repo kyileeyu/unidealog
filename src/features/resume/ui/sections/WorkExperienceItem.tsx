@@ -1,11 +1,3 @@
-import type { ReactNode } from "react";
-
-interface WorkExperienceDetails {
-  problem?: ReactNode;
-  action?: ReactNode;
-  result?: ReactNode;
-}
-
 interface Decision {
   title: string;
   description: string;
@@ -15,25 +7,7 @@ interface WorkExperienceItemProps {
   title: string;
   period: string;
   techStack: string;
-  details?: WorkExperienceDetails;
-  decisions?: Decision[];
-}
-
-function DetailSection({
-  label,
-  children,
-}: {
-  label: string;
-  children: ReactNode;
-}) {
-  return (
-    <div className="grid grid-cols-[32px_1fr]">
-      <span className="font-semibold text-resume-foreground">{label}</span>
-      <ul className="list-disc pl-[16px] flex flex-col gap-[2px]">
-        {children}
-      </ul>
-    </div>
-  );
+  decisions: Decision[];
 }
 
 function DecisionItem({ decision }: { decision: Decision }) {
@@ -51,7 +25,6 @@ export function WorkExperienceItem({
   title,
   period,
   techStack,
-  details,
   decisions,
 }: WorkExperienceItemProps) {
   return (
@@ -71,26 +44,11 @@ export function WorkExperienceItem({
 
       {/* 우측 컬럼 */}
       <div className="flex-1 text-[12.5px] leading-[1.75] text-resume-foreground resume-bullets">
-        {details && (
-          <div className="flex flex-col gap-[10px]">
-            {details.problem && (
-              <DetailSection label="문제">{details.problem}</DetailSection>
-            )}
-            {details.action && (
-              <DetailSection label="행동">{details.action}</DetailSection>
-            )}
-            {details.result && (
-              <DetailSection label="성과">{details.result}</DetailSection>
-            )}
-          </div>
-        )}
-        {decisions && (
-          <div className="flex flex-col gap-[10px]">
-            {decisions.map((decision, index) => (
-              <DecisionItem key={index} decision={decision} />
-            ))}
-          </div>
-        )}
+        <div className="flex flex-col gap-[10px]">
+          {decisions.map((decision, index) => (
+            <DecisionItem key={index} decision={decision} />
+          ))}
+        </div>
       </div>
     </div>
   );

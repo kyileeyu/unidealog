@@ -34,8 +34,8 @@ export function HeaderSection() {
             </a>
           </div>
           <p className="text-[12px] text-resume-muted-foreground">
-            JavaScript · TypeScript · React · Jest · Playwright · Webpack · Vite
-            · Git · Claude
+            JavaScript · TypeScript · React · Zustand · Redux · Jest · Playwright · Webpack · Vite
+            · Git · Claude Code
           </p>
         </div>
       </div>

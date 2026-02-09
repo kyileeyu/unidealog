@@ -3,6 +3,11 @@ import { ResumeSection } from "./ResumeSection";
 const experiences = [
   {
     period: "2026",
+    title: "프론트엔드 대시보드 생성",
+    description: "Grafana faro를 통해 Core Web Vitals 자동 수집 대시보드 구축",
+  },
+  {
+    period: "2026",
     title: "Teams 책 구매요청 봇 생성",
     description: "Lambda + AWS를 이용하여 Playwright E2E를 통해 생성",
   },
@@ -26,7 +31,7 @@ const experiences = [
 
 export function OtherExperienceSection() {
   return (
-    <ResumeSection title="기타 경험">
+    <ResumeSection title="그 외 주요 작업">
       <div className="flex flex-col gap-[8px] text-[13px]">
         {experiences.map((exp) => (
           <div
